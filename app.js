@@ -12,42 +12,48 @@ const menuBtn = document.getElementById('menuBtn');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const overlay = document.getElementById('overlay');
 
-function toggleMenu() {
-  dropdownMenu.classList.toggle('open');
-  overlay.classList.toggle('active');
+if (menuBtn && dropdownMenu && overlay) {
+  function toggleMenu() {
+    dropdownMenu.classList.toggle('open');
+    overlay.classList.toggle('active');
+  }
+
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  overlay.addEventListener('click', () => {
+    toggleMenu();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dropdownMenu.contains(e.target) && e.target !== menuBtn && !overlay.contains(e.target)) {
+      if (dropdownMenu.classList.contains('open')) {
+        toggleMenu();
+      }
+    }
+  });
 }
 
-menuBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  toggleMenu();
-});
-
-overlay.addEventListener('click', () => {
-  toggleMenu();
-});
-
-document.addEventListener('click', (e) => {
-  if (!dropdownMenu.contains(e.target) && e.target !== menuBtn && !overlay.contains(e.target)) {
-    if (dropdownMenu.classList.contains('open')) {
-      toggleMenu();
-    }
-  }
-});
-
-// ===== BOTONES DE ACCIÓN =====
-document.querySelectorAll('.action-btn').forEach(btn => {
+// ===== BOTONES DE ACCIÓN Y AVISOS =====
+// Detectamos si estamos en el index (para los botones que aún no tienen página)
+const actionButtons = document.querySelectorAll('button.action-btn'); // Nota: solo seleccionamos los <button>, no los <a>
+actionButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     const title = btn.querySelector('.btn-title').textContent;
     alert(`Próximamente: ${title}`);
   });
 });
 
-// ===== MENÚ INFERIOR =====
+// Para los enlaces del menú inferior que aún no existen (pesca, animales, etc.)
 document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', (e) => {
-    e.preventDefault();
-    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
+    const href = item.getAttribute('href');
+    if (href === '#') {
+      e.preventDefault();
+      alert(`Próximamente: Página de ${item.dataset.page}`);
+    }
   });
 });
 

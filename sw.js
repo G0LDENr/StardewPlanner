@@ -1,12 +1,16 @@
-const CACHE_NAME = 'stardew-planner-v1.2.5';
+const CACHE_NAME = 'stardew-planner-v1.2.7';
 const ASSETS = [
   './',
   './index.html',
+  './views/Cultivos.html',
   './css/styles.css',
+  './css/cultivos.css',
   './app.js',
   './manifest.json',
-  './images/Fondo.jpg',          // 👈 Ruta y mayúscula exacta
-  './images/icons/icon.png'      // 👈 Ruta del ícono
+  './images/Fondo.jpg',
+  './images/icons/icon.png',
+  './js/cultivos.js',
+  './database/cultivos.js',
 ];
 
 // Instalación

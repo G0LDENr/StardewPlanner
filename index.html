@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- 👇 COLOR DE LA BARRA DE ESTADO DEL TELÉFONO ACTUALIZADO -->
   <meta name="theme-color" content="#0a192b">
-  
   <title>Stardew Planner</title>
   
   <link rel="manifest" href="manifest.json">
@@ -47,14 +44,15 @@
 
     <section class="hero-section">
       <div class="hero-overlay">
-        <h2>Bienvenido a tu Granja</h2>
-        <p>Planifica tus cultivos, animales y aventuras</p>
+        <h2>!Hola, Granjero!</h2>
+        <p>Aqui tienes un resumen de tu granja y las herramientas para sacarle el máximo provecho.</p>
       </div>
     </section>
 
     <section class="buttons-column">
       
-      <button class="action-btn" data-action="cultivos">
+      <!-- Botón enlazado a cultivos.html -->
+      <a href="views/cultivos.html" class="action-btn" data-action="cultivos">
         <div class="btn-icon">
           <img src="svg/Planta.svg" alt="Cultivos">
         </div>
@@ -65,7 +63,7 @@
         <div class="btn-arrow">
           <i data-lucide="chevron-right"></i>
         </div>
-      </button>
+      </a>
 
       <button class="action-btn" data-action="pesca">
         <div class="btn-icon">
@@ -111,11 +109,11 @@
   </main>
 
   <nav class="bottom-nav">
-    <a href="#" class="nav-item active" data-page="inicio">
+    <a href="index.html" class="nav-item active" data-page="inicio">
       <span class="nav-icon"><i data-lucide="home"></i></span>
       <span class="nav-label">Inicio</span>
     </a>
-    <a href="#" class="nav-item" data-page="cultivos">
+    <a href="views/cultivos.html" class="nav-item" data-page="cultivos">
       <span class="nav-icon"><i data-lucide="wheat"></i></span>
       <span class="nav-label">Cultivos</span>
     </a>
