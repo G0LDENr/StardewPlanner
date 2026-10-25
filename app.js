@@ -37,7 +37,6 @@ document.addEventListener('click', (e) => {
 // ===== BOTONES DE ACCIÓN =====
 document.querySelectorAll('.action-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    // Como ahora el texto está dentro de un span, usamos el título para la alerta
     const title = btn.querySelector('.btn-title').textContent;
     alert(`Próximamente: ${title}`);
   });
@@ -53,5 +52,4 @@ document.querySelectorAll('.nav-item').forEach(item => {
 });
 
 // ===== INICIALIZAR ICONOS DE LUCIDE =====
-// Esta función reemplaza las etiquetas <i> por los gráficos vectoriales
 lucide.createIcons();

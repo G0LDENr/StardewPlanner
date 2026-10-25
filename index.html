@@ -10,15 +10,12 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="images/icons/icon.png">
   
-  <!-- Script de Lucide (CDN) -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
-  <!-- Capa oscura para el fondo borroso -->
   <div id="overlay" class="overlay"></div>
 
-  <!-- 🔝 BARRA SUPERIOR -->
   <header class="top-bar">
     <button id="menuBtn" class="menu-btn" aria-label="Abrir menú">
       <span></span><span></span><span></span>
@@ -28,7 +25,6 @@
     </h1>
   </header>
 
-  <!-- 📂 MENÚ DESPLEGABLE -->
   <nav id="dropdownMenu" class="dropdown-menu">
     <a href="#" class="dropdown-item">
       <i data-lucide="home"></i> Inicio
@@ -44,10 +40,8 @@
     </a>
   </nav>
 
-  <!-- 🖼️ CONTENEDOR PRINCIPAL -->
   <main class="main-content">
 
-    <!-- Imagen de fondo ajustada -->
     <section class="hero-section">
       <div class="hero-overlay">
         <h2>Bienvenido a tu Granja</h2>
@@ -55,46 +49,57 @@
       </div>
     </section>
 
-    <!-- 4 BOTONES EN COLUMNA (Estructura Icono + Textos) -->
     <section class="buttons-column">
       
       <button class="action-btn" data-action="cultivos">
         <div class="btn-icon">
-          <i data-lucide="wheat"></i>
+          <img src="svg/Planta.svg" alt="Cultivos">
         </div>
         <div class="btn-text">
           <span class="btn-title">Cultivos</span>
           <span class="btn-desc">Fechas de siembra, crecimiento y ganancias</span>
         </div>
+        <div class="btn-arrow">
+          <i data-lucide="chevron-right"></i>
+        </div>
       </button>
 
       <button class="action-btn" data-action="pesca">
         <div class="btn-icon">
-          <i data-lucide="fish"></i>
+          <img src="svg/Pesca.svg" alt="Pesca">
         </div>
         <div class="btn-text">
           <span class="btn-title">Pesca</span>
           <span class="btn-desc">Registro de capturas y ganancias</span>
         </div>
+        <div class="btn-arrow">
+          <i data-lucide="chevron-right"></i>
+        </div>
       </button>
 
       <button class="action-btn" data-action="animales">
         <div class="btn-icon">
-          <i data-lucide="bird"></i>
+          <img src="svg/Vaca.svg" alt="Animales">
         </div>
         <div class="btn-text">
           <span class="btn-title">Animales</span>
           <span class="btn-desc">Control de producción y cuidado diario</span>
         </div>
+        <div class="btn-arrow">
+          <i data-lucide="chevron-right"></i>
+        </div>
       </button>
 
       <button class="action-btn" data-action="calculadora">
         <div class="btn-icon">
-          <i data-lucide="calculator"></i>
+          <img src="svg/Calculadora.svg" alt="Calculadora">
         </div>
         <div class="btn-text">
           <span class="btn-title">Calculadora</span>
           <span class="btn-desc">Calcula ingresos y gastos de tu granja</span>
+        </div>
+        <div class="btn-arrow">
+          <i data-lucide="chevron-right"></i>
         </div>
       </button>
 
@@ -102,7 +107,6 @@
 
   </main>
 
-  <!-- 📱 MENÚ INFERIOR -->
   <nav class="bottom-nav">
     <a href="#" class="nav-item active" data-page="inicio">
       <span class="nav-icon"><i data-lucide="home"></i></span>
@@ -117,7 +121,7 @@
       <span class="nav-label">Pesca</span>
     </a>
     <a href="#" class="nav-item" data-page="animales">
-      <span class="nav-icon"><i data-lucide="egg"></i></span>
+      <span class="nav-icon"><i data-lucide="bird"></i></span>
       <span class="nav-label">Animales</span>
     </a>
     <a href="#" class="nav-item" data-page="calculadora">

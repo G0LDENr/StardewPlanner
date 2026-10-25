@@ -4,8 +4,8 @@
   "description": "Planificador de cultivos, pesca y animales para Stardew Valley",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f4f1e8",
-  "theme_color": "#4a7c2e",
+  "background_color": "#0a192b",
+  "theme_color": "#0a192b",
   "orientation": "portrait",
   "icons": [
     {
