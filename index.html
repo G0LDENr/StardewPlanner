@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4a7c2e">
+  <title>Stardew Planner</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="images/icons/icon.png">
+  
+  <!-- Script de Lucide (CDN) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Capa oscura para el fondo borroso -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- 🔝 BARRA SUPERIOR -->
+  <header class="top-bar">
+    <button id="menuBtn" class="menu-btn" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <h1 class="app-title">
+        Stardew Planner
+    </h1>
+  </header>
+
+  <!-- 📂 MENÚ DESPLEGABLE -->
+  <nav id="dropdownMenu" class="dropdown-menu">
+    <a href="#" class="dropdown-item">
+      <i data-lucide="home"></i> Inicio
+    </a>
+    <a href="#" class="dropdown-item">
+      <i data-lucide="settings"></i> Configuración
+    </a>
+    <a href="#" class="dropdown-item">
+      <i data-lucide="star"></i> Favoritos
+    </a>
+    <a href="#" class="dropdown-item">
+      <i data-lucide="info"></i> Acerca de
+    </a>
+  </nav>
+
+  <!-- 🖼️ CONTENEDOR PRINCIPAL -->
+  <main class="main-content">
+
+    <!-- Imagen de fondo ajustada -->
+    <section class="hero-section">
+      <div class="hero-overlay">
+        <h2>Bienvenido a tu Granja</h2>
+        <p>Planifica tus cultivos, animales y aventuras</p>
+      </div>
+    </section>
+
+    <!-- 4 BOTONES EN COLUMNA (Estructura Icono + Textos) -->
+    <section class="buttons-column">
+      
+      <button class="action-btn" data-action="cultivos">
+        <div class="btn-icon">
+          <i data-lucide="wheat"></i>
+        </div>
+        <div class="btn-text">
+          <span class="btn-title">Cultivos</span>
+          <span class="btn-desc">Fechas de siembra, crecimiento y ganancias</span>
+        </div>
+      </button>
+
+      <button class="action-btn" data-action="pesca">
+        <div class="btn-icon">
+          <i data-lucide="fish"></i>
+        </div>
+        <div class="btn-text">
+          <span class="btn-title">Pesca</span>
+          <span class="btn-desc">Registro de capturas y ganancias</span>
+        </div>
+      </button>
+
+      <button class="action-btn" data-action="animales">
+        <div class="btn-icon">
+          <i data-lucide="bird"></i>
+        </div>
+        <div class="btn-text">
+          <span class="btn-title">Animales</span>
+          <span class="btn-desc">Control de producción y cuidado diario</span>
+        </div>
+      </button>
+
+      <button class="action-btn" data-action="calculadora">
+        <div class="btn-icon">
+          <i data-lucide="calculator"></i>
+        </div>
+        <div class="btn-text">
+          <span class="btn-title">Calculadora</span>
+          <span class="btn-desc">Calcula ingresos y gastos de tu granja</span>
+        </div>
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- 📱 MENÚ INFERIOR -->
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item active" data-page="inicio">
+      <span class="nav-icon"><i data-lucide="home"></i></span>
+      <span class="nav-label">Inicio</span>
+    </a>
+    <a href="#" class="nav-item" data-page="cultivos">
+      <span class="nav-icon"><i data-lucide="wheat"></i></span>
+      <span class="nav-label">Cultivos</span>
+    </a>
+    <a href="#" class="nav-item" data-page="pesca">
+      <span class="nav-icon"><i data-lucide="fish"></i></span>
+      <span class="nav-label">Pesca</span>
+    </a>
+    <a href="#" class="nav-item" data-page="animales">
+      <span class="nav-icon"><i data-lucide="egg"></i></span>
+      <span class="nav-label">Animales</span>
+    </a>
+    <a href="#" class="nav-item" data-page="calculadora">
+      <span class="nav-icon"><i data-lucide="calculator"></i></span>
+      <span class="nav-label">Calculadora</span>
+    </a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
