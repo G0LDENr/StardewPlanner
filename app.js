@@ -1,7 +1,10 @@
-// ===== SERVICE WORKER =====
+// ===== SERVICE WORKER (CORREGIDO) =====
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('../sw.js')
+    // Detectamos si estamos en la raíz (index) o dentro de /views
+    const swPath = window.location.pathname.includes('/views/') ? '../sw.js' : 'sw.js';
+    
+    navigator.serviceWorker.register(swPath)
       .then(reg => console.log('✅ SW registrado'))
       .catch(err => console.error('❌ Error SW:', err));
   });
@@ -36,7 +39,7 @@ if (menuBtn && dropdownMenu && overlay) {
   });
 }
 
-// ===== MANEJO DE NAVEGACIÓN (A PRUEBA DE BALAS) =====
+// ===== MANEJO DE NAVEGACIÓN (CORREGIDO) =====
 document.querySelectorAll('.action-btn, .nav-item').forEach(elemento => {
   elemento.addEventListener('click', (e) => {
     
@@ -44,13 +47,13 @@ document.querySelectorAll('.action-btn, .nav-item').forEach(elemento => {
     if (elemento.tagName.toLowerCase() === 'a') {
       const href = elemento.getAttribute('href');
       
-      // Si el enlace contiene CUALQUIER ".html" (ej. ../index.html, Cultivos.html, etc.)
+      // Si el enlace contiene ".html" (ej. index.html, ../index.html, Cultivos.html)
       if (href && href.includes('.html')) {
-        return; // Dejamos que el navegador navegue
+        return; // Dejamos que el navegador navegue sin alertas
       }
     }
 
-    // Si no tiene .html, es un botón o un "#", mostramos alerta
+    // Si es un botón o un href="#" (menú desplegable)
     e.preventDefault();
     
     const titulo = elemento.querySelector('.btn-title')?.textContent || 
