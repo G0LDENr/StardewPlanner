@@ -40,21 +40,21 @@ if (menuBtn && dropdownMenu && overlay) {
   });
 }
 
-// ===== MANEJO DE NAVEGACIÓN (CORREGIDO) =====
+// ===== MANEJO DE NAVEGACIÓN (BLINDADO) =====
 document.querySelectorAll('.action-btn, .nav-item').forEach(elemento => {
   elemento.addEventListener('click', (e) => {
     
-    // Si es un enlace (<a>) y NO es un "#", dejamos que el navegador haga su trabajo
+    // 1. Verificamos si es un enlace (<a>)
     if (elemento.tagName.toLowerCase() === 'a') {
       const href = elemento.getAttribute('href');
       
-      // Si el enlace contiene ".html", es una página real. ¡No hacemos nada más!
-      if (href && href.includes('.html')) {
-        return; 
+      // 2. Si el enlace contiene ".html" o "views/", es una página real y dejamos navegar
+      if (href && (href.includes('.html') || href.includes('views/'))) {
+        return; // El código se detiene aquí y el navegador hace la redirección
       }
     }
 
-    // Si llegamos aquí, es un botón (como el de antes) o un href="#" (menú desplegable)
+    // 3. Si llegamos aquí, es un botón o un href="#" (sección en construcción)
     e.preventDefault();
     
     const titulo = elemento.querySelector('.btn-title')?.textContent || 
