@@ -69,6 +69,7 @@
   margin-top: 40px;
 }
 
+/* Estilos base de cada tarjeta de la lista */
 .calc-item {
   display: flex;
   align-items: center;
@@ -77,6 +78,7 @@
   border-radius: 12px;
   border: 1px solid #eaeaea;
   box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .calc-item img {
@@ -123,7 +125,7 @@
   width: 90px;
 }
 
-/* 🆕 Nuevo diseño de los controles de cantidad */
+/* 🆕 Diseño de los controles de cantidad */
 .qty-control {
   display: flex;
   align-items: center;
@@ -149,7 +151,6 @@
 }
 
 .qty-btn:hover { background: #d0d0d0; }
-
 .qty-btn:active { background: #c0c0c0; }
 
 .calc-item-qty {
@@ -164,7 +165,7 @@
   outline: none;
 }
 
-/* Ocultar las flechas del input number para navegadores */
+/* Ocultar flechas del input number */
 .calc-item-qty::-webkit-outer-spin-button,
 .calc-item-qty::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -208,7 +209,7 @@
 .total-box strong {
   color: #8e44ad;
   font-size: 1.4rem;
-  transition: transform 0.2s; /* Animación para el botón calcular */
+  transition: transform 0.2s;
 }
 
 .btn-calc {
@@ -224,3 +225,33 @@
 }
 
 .btn-calc:hover { background: #7d3c98; }
+
+/* ===== ESTILOS DE CALIDAD PARA LOS CARDS ===== */
+
+/* Normal (Por defecto, sin cambios fuertes) */
+.calc-item.calidad-normal {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+/* Plata */
+.calc-item.calidad-plata {
+  background: #f2f4f6; /* Gris muy clarito */
+  border: 1px solid #aab7c4; /* Borde plateado */
+  box-shadow: 0 4px 12px rgba(170, 183, 196, 0.25);
+}
+
+/* Oro */
+.calc-item.calidad-oro {
+  background: #fffcf2; /* Amarillo muy clarito */
+  border: 1px solid #f1c40f; /* Borde amarillo dorado */
+  box-shadow: 0 4px 12px rgba(241, 196, 15, 0.25);
+}
+
+/* Iridio */
+.calc-item.calidad-iridio {
+  background: #f9f2fb; /* Morado muy clarito */
+  border: 1px solid #9b59b6; /* Borde morado iridio */
+  box-shadow: 0 4px 12px rgba(155, 89, 182, 0.25);
+}

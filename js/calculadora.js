@@ -5,16 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalGanancias = document.getElementById('totalGanancias');
   const btnCalcular = document.getElementById('btnCalcular');
 
-  let contadorId = 0; // Contador para darle un ID único a CADA producto agregado
+  let contadorGlobal = 0;
 
-  // 1. Unimos todas las bases de datos en una sola
   const todosLosProductos = [
     ...databaseCultivos.map(p => ({ ...p, categoria: "Cultivo" })),
     ...databasePeces.map(p => ({ ...p, categoria: "Pez" })),
     ...databaseAnimal.map(p => ({ ...p, categoria: "Animal" }))
   ];
 
-  // 2. Llenamos el <select> con los productos
   todosLosProductos.forEach(producto => {
     const option = document.createElement('option');
     option.value = producto.id;
@@ -22,20 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
     selectProducto.appendChild(option);
   });
 
-  // 3. Función para agregar un producto a la lista
   btnAgregar.addEventListener('click', () => {
     const idSeleccionado = selectProducto.value;
-    if (!idSeleccionado) return; // Si no selecciona nada, no hace nada
+    if (!idSeleccionado) return; 
 
     const producto = todosLosProductos.find(p => p.id === idSeleccionado);
     
-    // Generamos un ID ÚNICO para esta fila (no importa si es el mismo producto)
-    contadorId++;
-    const uniqueId = `item-${producto.id}-${contadorId}`;
+    contadorGlobal++;
+    const idUnico = `calc-item-${contadorGlobal}`;
 
     const item = document.createElement('div');
     item.className = 'calc-item';
-    item.id = uniqueId;
+    item.id = idUnico;
+    item.dataset.productoId = producto.id; 
     
     item.innerHTML = `
       <img src="${producto.svg}" alt="${producto.nombre}" onerror="this.src='../svg/Planta.svg'">
@@ -59,9 +56,27 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    // Lógica de los botones de cantidad (+ y -)
     const inputCantidad = item.querySelector('.item-cantidad');
-    
+    const selectCalidad = item.querySelector('.item-calidad');
+
+    // 👇 FUNCIÓN PARA CAMBIAR EL COLOR DEL CARD SEGÚN LA CALIDAD
+    const actualizarColorCalidad = () => {
+      // Quitamos cualquier clase de color anterior
+      item.classList.remove('calidad-normal', 'calidad-plata', 'calidad-oro', 'calidad-iridio');
+      // Agregamos la clase nueva según el valor seleccionado
+      item.classList.add(`calidad-${selectCalidad.value}`);
+    };
+
+    // Escuchar el cambio de calidad
+    selectCalidad.addEventListener('change', () => {
+      actualizarColorCalidad();
+      calcularTotal();
+    });
+
+    // Llamamos a la función al inicio por si acaso
+    actualizarColorCalidad();
+
+    // Botones de cantidad
     item.querySelector('.minus').addEventListener('click', () => {
       let val = parseInt(inputCantidad.value) || 1;
       if (val > 1) {
@@ -76,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       calcularTotal();
     });
 
-    // Borrar item
+    // Borrar fila
     item.querySelector('.btn-remove').addEventListener('click', () => {
       item.remove();
       calcularTotal();
@@ -85,40 +100,29 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Borrar mensaje de vacío si existe
     const emptyMsg = listaCalculo.querySelector('.empty-msg');
     if (emptyMsg) emptyMsg.remove();
 
     listaCalculo.appendChild(item);
     lucide.createIcons();
 
-    // Escuchar cambios para recalcular
     inputCantidad.addEventListener('input', calcularTotal);
-    item.querySelector('.item-calidad').addEventListener('change', calcularTotal);
 
-    // Resetear el select para que puedas elegir otro
-    selectProducto.value = "";
-    
-    // Calcular de inmediato al agregar
+    selectProducto.value = ""; 
     calcularTotal();
   });
 
-  // 4. Función para calcular el total
   function calcularTotal() {
     let total = 0;
     const items = document.querySelectorAll('.calc-item');
 
     items.forEach(item => {
-      // Obtenemos el ID base separando por guiones (el ID original no tiene guiones)
-      const partesId = item.id.split('-');
-      const idBase = partesId[1]; 
+      const productoId = item.dataset.productoId;
+      const producto = todosLosProductos.find(p => p.id === productoId);
       
-      const producto = todosLosProductos.find(p => p.id === idBase);
-      
-      const calidad = item.querySelector('.item-calidad').value;
-      const cantidad = parseInt(item.querySelector('.item-cantidad').value) || 0;
-
       if (producto) {
+        const calidad = item.querySelector('.item-calidad').value;
+        const cantidad = parseInt(item.querySelector('.item-cantidad').value) || 0;
         total += (producto.precios[calidad] * cantidad);
       }
     });
@@ -126,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
     totalGanancias.textContent = `${total}g`;
   }
 
-  // Botón de calcular (opcional, ya que se actualiza en tiempo real)
   btnCalcular.addEventListener('click', () => {
     calcularTotal();
     totalGanancias.style.transform = "scale(1.1)";
