@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalGanancias = document.getElementById('totalGanancias');
   const btnCalcular = document.getElementById('btnCalcular');
 
+  let contadorId = 0; // Contador para darle un ID único a CADA producto agregado
+
   // 1. Unimos todas las bases de datos en una sola
   const todosLosProductos = [
     ...databaseCultivos.map(p => ({ ...p, categoria: "Cultivo" })),
@@ -27,16 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const producto = todosLosProductos.find(p => p.id === idSeleccionado);
     
-    // Si ya está en la lista, no lo duplicamos
-    if (document.getElementById(`item-${producto.id}`)) {
-      alert("Este producto ya está en la lista. Cambia la cantidad ahí.");
-      return;
-    }
+    // Generamos un ID ÚNICO para esta fila (no importa si es el mismo producto)
+    contadorId++;
+    const uniqueId = `item-${producto.id}-${contadorId}`;
 
-    // Creamos el HTML del item
     const item = document.createElement('div');
     item.className = 'calc-item';
-    item.id = `item-${producto.id}`;
+    item.id = uniqueId;
     
     item.innerHTML = `
       <img src="${producto.svg}" alt="${producto.nombre}" onerror="this.src='../svg/Planta.svg'">
@@ -51,35 +50,57 @@ document.addEventListener('DOMContentLoaded', () => {
           <option value="oro">Oro</option>
           <option value="iridio">Iridio</option>
         </select>
-        <div style="display:flex; gap:5px; align-items:center;">
+        <div class="qty-control">
+          <button class="qty-btn minus">-</button>
           <input type="number" class="item-cantidad" value="1" min="1">
-          <button class="btn-remove"><i data-lucide="trash-2"></i></button>
+          <button class="qty-btn plus">+</button>
         </div>
+        <button class="btn-remove"><i data-lucide="trash-2"></i></button>
       </div>
     `;
 
-    // Lógica para eliminar el item
+    // Lógica de los botones de cantidad (+ y -)
+    const inputCantidad = item.querySelector('.item-cantidad');
+    
+    item.querySelector('.minus').addEventListener('click', () => {
+      let val = parseInt(inputCantidad.value) || 1;
+      if (val > 1) {
+        inputCantidad.value = val - 1;
+        calcularTotal();
+      }
+    });
+
+    item.querySelector('.plus').addEventListener('click', () => {
+      let val = parseInt(inputCantidad.value) || 1;
+      inputCantidad.value = val + 1;
+      calcularTotal();
+    });
+
+    // Borrar item
     item.querySelector('.btn-remove').addEventListener('click', () => {
       item.remove();
-      calcularTotal(); // Recalculamos al borrar
-      if(listaCalculo.children.length === 0) {
+      calcularTotal();
+      if(listaCalculo.querySelectorAll('.calc-item').length === 0) {
         listaCalculo.innerHTML = '<p class="empty-msg">No has agregado ningún producto.</p>';
       }
     });
 
-    // Reemplazamos el mensaje de vacío si existe
+    // Borrar mensaje de vacío si existe
     const emptyMsg = listaCalculo.querySelector('.empty-msg');
     if (emptyMsg) emptyMsg.remove();
 
     listaCalculo.appendChild(item);
-    lucide.createIcons(); // Cargar el icono del bote de basura
+    lucide.createIcons();
 
-    // Escuchar cambios en la cantidad o calidad para recalcular
-    item.querySelector('.item-cantidad').addEventListener('input', calcularTotal);
+    // Escuchar cambios para recalcular
+    inputCantidad.addEventListener('input', calcularTotal);
     item.querySelector('.item-calidad').addEventListener('change', calcularTotal);
 
-    // Reseteamos el select
+    // Resetear el select para que puedas elegir otro
     selectProducto.value = "";
+    
+    // Calcular de inmediato al agregar
+    calcularTotal();
   });
 
   // 4. Función para calcular el total
@@ -88,24 +109,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll('.calc-item');
 
     items.forEach(item => {
-      const idProducto = item.id.replace('item-', '');
-      const producto = todosLosProductos.find(p => p.id === idProducto);
+      // Obtenemos el ID base separando por guiones (el ID original no tiene guiones)
+      const partesId = item.id.split('-');
+      const idBase = partesId[1]; 
+      
+      const producto = todosLosProductos.find(p => p.id === idBase);
       
       const calidad = item.querySelector('.item-calidad').value;
       const cantidad = parseInt(item.querySelector('.item-cantidad').value) || 0;
 
-      // Obtenemos el precio según la calidad seleccionada
-      const precioUnitario = producto.precios[calidad];
-      total += (precioUnitario * cantidad);
+      if (producto) {
+        total += (producto.precios[calidad] * cantidad);
+      }
     });
 
     totalGanancias.textContent = `${total}g`;
   }
 
-  // Botón de calcular (por si se quiere forzar, aunque se actualiza en tiempo real)
+  // Botón de calcular (opcional, ya que se actualiza en tiempo real)
   btnCalcular.addEventListener('click', () => {
     calcularTotal();
-    // Un pequeño efecto visual
     totalGanancias.style.transform = "scale(1.1)";
     setTimeout(() => totalGanancias.style.transform = "scale(1)", 200);
   });
