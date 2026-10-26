@@ -26,7 +26,7 @@
   </header>
 
   <nav id="dropdownMenu" class="dropdown-menu">
-    <a href="#" class="dropdown-item">
+    <a href="index.html" class="dropdown-item">
       <i data-lucide="home"></i> Inicio
     </a>
     <a href="#" class="dropdown-item">
@@ -44,15 +44,15 @@
 
     <section class="hero-section">
       <div class="hero-overlay">
-        <h2>!Hola, Granjero!</h2>
-        <p>Aqui tienes un resumen de tu granja y las herramientas para sacarle el máximo provecho.</p>
+        <h2>¡Hola, Granjero!</h2>
+        <p>Aquí tienes un resumen de tu granja y las herramientas para sacarle el máximo provecho.</p>
       </div>
     </section>
 
     <section class="buttons-column">
       
-      <!-- Botón enlazado a cultivos.html -->
-      <a href="views/cultivos.html" class="action-btn" data-action="cultivos">
+      <!-- Botón a Cultivos (Ruta exacta) -->
+      <a href="views/Cultivos.html" class="action-btn" data-action="cultivos">
         <div class="btn-icon">
           <img src="svg/Planta.svg" alt="Cultivos">
         </div>
@@ -65,7 +65,8 @@
         </div>
       </a>
 
-      <button class="action-btn" data-action="pesca">
+      <!-- Botón a Pesca (Ruta exacta) -->
+      <a href="views/Pesca.html" class="action-btn" data-action="pesca">
         <div class="btn-icon">
           <img src="svg/Pesca.svg" alt="Pesca">
         </div>
@@ -76,8 +77,9 @@
         <div class="btn-arrow">
           <i data-lucide="chevron-right"></i>
         </div>
-      </button>
+      </a>
 
+      <!-- Botones que aún no tienen vista -->
       <button class="action-btn" data-action="animales">
         <div class="btn-icon">
           <img src="svg/Vaca.svg" alt="Animales">
@@ -113,14 +115,19 @@
       <span class="nav-icon"><i data-lucide="home"></i></span>
       <span class="nav-label">Inicio</span>
     </a>
-    <a href="views/cultivos.html" class="nav-item" data-page="cultivos">
+    
+    <!-- Ruta corregida: Cultivos con C mayúscula -->
+    <a href="views/Cultivos.html" class="nav-item" data-page="cultivos">
       <span class="nav-icon"><i data-lucide="wheat"></i></span>
       <span class="nav-label">Cultivos</span>
     </a>
-    <a href="#" class="nav-item" data-page="pesca">
+
+    <!-- Ruta corregida: Pesca con P mayúscula -->
+    <a href="views/Pesca.html" class="nav-item" data-page="pesca">
       <span class="nav-icon"><i data-lucide="fish"></i></span>
       <span class="nav-label">Pesca</span>
     </a>
+    
     <a href="#" class="nav-item" data-page="animales">
       <span class="nav-icon"><i data-lucide="bird"></i></span>
       <span class="nav-label">Animales</span>

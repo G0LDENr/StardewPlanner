@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a192b">
+  <title>Pesca - Stardew Planner</title>
+  
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/pesca.css">
+  <link rel="icon" type="image/png" href="../images/icons/icon.png">
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div id="overlay" class="overlay"></div>
+
+  <header class="top-bar">
+    <button id="menuBtn" class="menu-btn" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <h1 class="app-title">Stardew Planner</h1>
+  </header>
+
+  <nav id="dropdownMenu" class="dropdown-menu">
+    <a href="../index.html" class="dropdown-item"><i data-lucide="home"></i> Inicio</a>
+    <a href="#" class="dropdown-item"><i data-lucide="settings"></i> Configuración</a>
+    <a href="#" class="dropdown-item"><i data-lucide="star"></i> Favoritos</a>
+    <a href="#" class="dropdown-item"><i data-lucide="info"></i> Acerca de</a>
+  </nav>
+
+  <main class="main-content">
+
+    <!-- 🔍 BUSCADOR Y FILTROS (Ahora filtran por Estación) -->
+    <div class="search-filter-section">
+      <div class="search-bar">
+        <i data-lucide="search"></i>
+        <input type="text" id="inputBuscar" placeholder="Buscar pez por nombre...">
+      </div>
+      <div class="filter-chips" id="filtrosEstacion">
+        <button class="chip active" data-estacion="Todas">Todas</button>
+        <button class="chip" data-estacion="Primavera">Primavera</button>
+        <button class="chip" data-estacion="Verano">Verano</button>
+        <button class="chip" data-estacion="Otoño">Otoño</button>
+        <button class="chip" data-estacion="Invierno">Invierno</button>
+      </div>
+    </div>
+
+    <!-- 📦 CONTENEDOR DE CARDS -->
+    <div class="view-content" id="listaPeces">
+      <!-- Las tarjetas se generan con JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- VENTANA MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <button class="close-modal" id="closeModal"><i data-lucide="x"></i></button>
+      <div class="modal-header">
+        <img id="modalImg" src="" alt="">
+        <div class="modal-title-text">
+          <h2 id="modalTitulo"></h2>
+          <span id="modalCategoria" class="badge"></span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="info-row">
+          <span><i data-lucide="map-pin"></i> Lugar:</span>
+          <strong id="modalLugar"></strong>
+        </div>
+        <div class="info-row">
+          <span><i data-lucide="activity"></i> Dificultad:</span>
+          <strong id="modalDificultad"></strong>
+        </div>
+        
+        <h4>Precios de Venta</h4>
+        <div class="precios-grid">
+          <div class="precio-box normal"><span>Normal</span><strong id="precioNormal"></strong></div>
+          <div class="precio-box plata"><span>Plata</span><strong id="precioPlata"></strong></div>
+          <div class="precio-box oro"><span>Oro</span><strong id="precioOro"></strong></div>
+          <div class="precio-box iridio"><span>Iridio</span><strong id="precioIridio"></strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="../index.html" class="nav-item" data-page="inicio">
+      <span class="nav-icon"><i data-lucide="home"></i></span><span class="nav-label">Inicio</span>
+    </a>
+    <a href="Cultivos.html" class="nav-item" data-page="cultivos">
+      <span class="nav-icon"><i data-lucide="wheat"></i></span><span class="nav-label">Cultivos</span>
+    </a>
+    <a href="Pesca.html" class="nav-item active" data-page="pesca">
+      <span class="nav-icon"><i data-lucide="fish"></i></span><span class="nav-label">Pesca</span>
+    </a>
+    <a href="#" class="nav-item" data-page="animales">
+      <span class="nav-icon"><i data-lucide="bird"></i></span><span class="nav-label">Animales</span>
+    </a>
+    <a href="#" class="nav-item" data-page="calculadora">
+      <span class="nav-icon"><i data-lucide="calculator"></i></span><span class="nav-label">Calculadora</span>
+    </a>
+  </nav>
+
+  <script src="../database/pesca.js"></script>
+  <script src="../app.js"></script>
+  <script src="../js/pesca.js"></script>
+</body>
+</html>

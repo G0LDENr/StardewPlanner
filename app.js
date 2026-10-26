@@ -1,9 +1,15 @@
 // ===== SERVICE WORKER =====
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
+    // Usamos rutas relativas para que funcione tanto en index como en /views/
     navigator.serviceWorker.register('sw.js')
       .then(reg => console.log('✅ SW registrado'))
-      .catch(err => console.error('❌ Error SW:', err));
+      .catch(err => {
+        // Si falla en la raíz (views), intentamos un nivel arriba
+        navigator.serviceWorker.register('../sw.js')
+          .then(reg => console.log('✅ SW registrado desde views'))
+          .catch(err => console.error('❌ Error SW:', err));
+      });
   });
 }
 
@@ -36,26 +42,34 @@ if (menuBtn && dropdownMenu && overlay) {
   });
 }
 
-// ===== BOTONES DE ACCIÓN Y AVISOS =====
-// Detectamos si estamos en el index (para los botones que aún no tienen página)
-const actionButtons = document.querySelectorAll('button.action-btn'); // Nota: solo seleccionamos los <button>, no los <a>
-actionButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const title = btn.querySelector('.btn-title').textContent;
-    alert(`Próximamente: ${title}`);
-  });
-});
-
-// Para los enlaces del menú inferior que aún no existen (pesca, animales, etc.)
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', (e) => {
-    const href = item.getAttribute('href');
-    if (href === '#') {
-      e.preventDefault();
-      alert(`Próximamente: Página de ${item.dataset.page}`);
+// ===== MANEJO DE BOTONES Y NAVEGACIÓN =====
+document.querySelectorAll('.action-btn, .nav-item, .dropdown-item').forEach(elemento => {
+  elemento.addEventListener('click', (e) => {
+    
+    // 1. Si es un enlace (<a>) y tiene una URL real (no es "#" ni está vacío)
+    if (elemento.tagName.toLowerCase() === 'a') {
+      const href = elemento.getAttribute('href');
+      
+      if (href && href !== '#' && href !== '') {
+        // Es un enlace real (ej. views/Pesca.html), dejamos que el navegador haga su trabajo
+        return; 
+      }
     }
+
+    // 2. Si llegamos aquí, es un botón sin página o un enlace con "#"
+    e.preventDefault();
+    
+    // Buscamos el título (ya sea de un botón grande o de una pestaña del menú)
+    const titulo = elemento.querySelector('.btn-title')?.textContent || 
+                   elemento.querySelector('.nav-label')?.textContent || 
+                   "Sección";
+                   
+    alert(`Próximamente: ${titulo}`);
   });
 });
 
 // ===== INICIALIZAR ICONOS DE LUCIDE =====
-lucide.createIcons();
+// Nos aseguramos de que Lucide exista antes de llamarlo para evitar errores
+if (typeof lucide !== 'undefined') {
+  lucide.createIcons();
+}
