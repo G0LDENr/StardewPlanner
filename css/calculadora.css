@@ -1,0 +1,179 @@
+/* ===== VISTA CALCULADORA (ESTILOS EXCLUSIVOS) ===== */
+
+.calc-header {
+  padding: 20px 16px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.calc-header h2 {
+  color: #502b7a;
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+
+.calc-header p {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* 🔽 Selector de Productos */
+.calc-selector {
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.calc-selector select {
+  flex-grow: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #f9f9f9;
+  outline: none;
+  color: #2b2b2b;
+}
+
+.btn-add {
+  background: #8e44ad;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-add:hover { background: #7d3c98; }
+
+/* 🛒 Lista de Productos */
+.calc-list {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 200px;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  margin-top: 40px;
+}
+
+.calc-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.calc-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-right: 12px;
+}
+
+.calc-item-info {
+  flex-grow: 1;
+}
+
+.calc-item-title {
+  font-weight: 700;
+  color: #2b2b2b;
+  font-size: 1rem;
+}
+
+.calc-item-sub {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Controles dentro de la lista */
+.calc-item-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.calc-item select {
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 0.8rem;
+  background: #f9f9f9;
+}
+
+.calc-item-qty {
+  width: 50px;
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.btn-remove {
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.btn-remove:hover { color: #c0392b; }
+
+/* 💰 Total y Botón */
+.calc-footer {
+  padding: 20px 16px;
+  background: #fff;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  bottom: 70px; /* Justo encima del menú inferior */
+}
+
+.total-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #2b2b2b;
+  background: #f4f1e8;
+  padding: 12px 16px;
+  border-radius: 12px;
+}
+
+.total-box strong {
+  color: #8e44ad;
+  font-size: 1.4rem;
+}
+
+.btn-calc {
+  background: #8e44ad;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-calc:hover { background: #7d3c98; }
