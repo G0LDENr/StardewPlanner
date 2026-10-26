@@ -1,4 +1,4 @@
-const CACHE_NAME = 'stardew-planner-v1.4.1';
+const CACHE_NAME = 'stardew-planner-v1.4.2';
 const ASSETS = [
   './',
   //htmls
