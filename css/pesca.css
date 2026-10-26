@@ -226,6 +226,11 @@
   color: #888;
 }
 
+/* Color especial para el evento si no es "Ninguno" */
+#modalEvento {
+  color: #8e44ad;
+}
+
 .modal-body h4 {
   margin: 20px 0 12px;
   font-size: 1rem;
@@ -249,7 +254,7 @@
 .precio-box span { font-size: 0.75rem; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
 .precio-box strong { font-size: 1.1rem; }
 
-/* Colores de las calidades (Iguales en todas las vistas) */
+/* Colores de las calidades */
 .precio-box.normal { background: #f4f1e8; color: #555; }
 .precio-box.plata { background: #e0e0e0; color: #666; }
 .precio-box.oro { background: #fcf3cf; color: #b7950b; }

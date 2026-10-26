@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modalLugar').textContent = pez.lugar;
     document.getElementById('modalDificultad').textContent = pez.dificultad;
     
-    // Si el pez no tiene clima definido, mostramos "Cualquiera"
     document.getElementById('modalClima').textContent = pez.clima || "Cualquiera";
+    document.getElementById('modalEvento').textContent = pez.evento || "Ninguno";
     
     document.getElementById('precioNormal').textContent = `${pez.precios.normal}g`;
     document.getElementById('precioPlata').textContent = `${pez.precios.plata}g`;
