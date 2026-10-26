@@ -51,10 +51,10 @@
 
     <section class="buttons-column">
       
-      <!-- Botón a Cultivos (Ruta exacta) -->
+      <!-- Botón a Cultivos -->
       <a href="views/Cultivos.html" class="action-btn" data-action="cultivos">
         <div class="btn-icon">
-          <img src="svg/Planta.svg" alt="Cultivos">
+          <img src="svg/Cultivos/Chirivia.svg" alt="Cultivos">
         </div>
         <div class="btn-text">
           <span class="btn-title">Cultivos</span>
@@ -65,10 +65,10 @@
         </div>
       </a>
 
-      <!-- Botón a Pesca (Ruta exacta) -->
+      <!-- Botón a Pesca -->
       <a href="views/Pesca.html" class="action-btn" data-action="pesca">
         <div class="btn-icon">
-          <img src="svg/Pesca.svg" alt="Pesca">
+          <img src="svg/Pesca/Salmon.svg" alt="Pesca">
         </div>
         <div class="btn-text">
           <span class="btn-title">Pesca</span>
@@ -79,20 +79,21 @@
         </div>
       </a>
 
-      <!-- Botones que aún no tienen vista -->
-      <button class="action-btn" data-action="animales">
+      <!-- Botón a Animal (Cambiado a singular) -->
+      <a href="views/Animal.html" class="action-btn" data-action="animal">
         <div class="btn-icon">
-          <img src="svg/Vaca.svg" alt="Animales">
+          <img src="svg/Vaca.svg" alt="Animal">
         </div>
         <div class="btn-text">
-          <span class="btn-title">Animales</span>
+          <span class="btn-title">Animal</span>
           <span class="btn-desc">Control de producción y cuidado diario</span>
         </div>
         <div class="btn-arrow">
           <i data-lucide="chevron-right"></i>
         </div>
-      </button>
+      </a>
 
+      <!-- Botón de Calculadora (Sigue siendo un botón) -->
       <button class="action-btn" data-action="calculadora">
         <div class="btn-icon">
           <img src="svg/Calculadora.svg" alt="Calculadora">
@@ -115,23 +116,21 @@
       <span class="nav-icon"><i data-lucide="home"></i></span>
       <span class="nav-label">Inicio</span>
     </a>
-    
-    <!-- Ruta corregida: Cultivos con C mayúscula -->
     <a href="views/Cultivos.html" class="nav-item" data-page="cultivos">
       <span class="nav-icon"><i data-lucide="wheat"></i></span>
       <span class="nav-label">Cultivos</span>
     </a>
-
-    <!-- Ruta corregida: Pesca con P mayúscula -->
     <a href="views/Pesca.html" class="nav-item" data-page="pesca">
       <span class="nav-icon"><i data-lucide="fish"></i></span>
       <span class="nav-label">Pesca</span>
     </a>
     
-    <a href="#" class="nav-item" data-page="animales">
+    <!-- Pestaña de Animal (Cambiado a singular) -->
+    <a href="views/Animal.html" class="nav-item" data-page="animal">
       <span class="nav-icon"><i data-lucide="bird"></i></span>
-      <span class="nav-label">Animales</span>
+      <span class="nav-label">Animal</span>
     </a>
+    
     <a href="#" class="nav-item" data-page="calculadora">
       <span class="nav-icon"><i data-lucide="calculator"></i></span>
       <span class="nav-label">Calculadora</span>

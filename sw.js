@@ -1,20 +1,24 @@
-const CACHE_NAME = 'stardew-planner-v1.2.9';
+const CACHE_NAME = 'stardew-planner-v1.3.4';
 const ASSETS = [
   './',
   './index.html',
   './views/Cultivos.html',
   './views/Pesca.html',
+  './views/Animal.html',
   './css/styles.css',
   './css/cultivos.css',
   './css/pesca.css',
+  './css/animal.css',
   './app.js',
   './manifest.json',
   './images/Fondo.jpg',
   './images/icons/icon.png',
   './js/cultivos.js',
   './js/pesca.js',
+  './js/animal.js',
   './database/cultivos.js',
-  './database/pesca.js', 
+  './database/pesca.js',
+  './database/animal.js',
 ];
 
 // Instalación

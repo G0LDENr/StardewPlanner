@@ -195,7 +195,8 @@ body {
   box-shadow: 0 5px 12px rgba(52, 152, 219, 0.15);
 }
 
-.action-btn[data-action="animales"] {
+/* 👇 CAMBIADO A "animal" EN SINGULAR */
+.action-btn[data-action="animal"] {
   background-color: #fde2c7;
   border: 1px solid #f8c9a4; 
   color: #8a4512;

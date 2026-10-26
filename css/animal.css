@@ -1,0 +1,241 @@
+/* ===== VISTA ANIMAL (ESTILOS EXCLUSIVOS) ===== */
+
+.search-filter-section {
+  padding: 16px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #fff5ec; /* Tono cálido para el buscador */
+  border-radius: 12px;
+  padding: 10px 14px;
+  gap: 10px;
+}
+
+.search-bar [data-lucide] { color: #e67e22; width: 20px; height: 20px; }
+
+.search-bar input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 1rem;
+  outline: none;
+  color: #2b2b2b;
+}
+
+.view-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.crop-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  border: 1px solid #eaeaea;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.crop-card:active { transform: scale(0.98); }
+
+.crop-card-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  margin-right: 16px;
+}
+
+.crop-card-info {
+  flex-grow: 1;
+}
+
+.crop-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2b2b2b;
+  margin-bottom: 2px;
+}
+
+.crop-card-season {
+  font-size: 0.8rem;
+  color: #8a4512; /* Letra naranja oscuro */
+  background: #fde2c7; /* Fondo naranja claro */
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+
+.crop-card-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.crop-card-price {
+  font-weight: 700;
+  color: #000000;
+}
+
+.crop-card-arrow {
+  color: #ccc;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: #fff;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.close-modal {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 32px; height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-header img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.modal-title-text h2 {
+  font-size: 1.4rem;
+  color: #2b2b2b;
+  margin-bottom: 4px;
+}
+
+.badge {
+  background: #fde2c7;
+  color: #8a4512;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.modal-body .info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 8px;
+}
+
+.modal-body .info-row span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modal-body .info-row [data-lucide] {
+  width: 18px; height: 18px;
+  color: #888;
+}
+
+.modal-body h4 {
+  margin: 20px 0 12px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.precios-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.precio-box {
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.precio-box span { font-size: 0.75rem; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+.precio-box strong { font-size: 1.1rem; }
+
+/* Colores de las calidades */
+.precio-box.normal { background: #f4f1e8; color: #555; }
+.precio-box.plata { background: #e0e0e0; color: #666; }
+.precio-box.oro { background: #fcf3cf; color: #b7950b; }
+.precio-box.iridio { background: #e8daef; color: #8e44ad; }
+
+/* ===== NOTA INFORMATIVA ===== */
+.modal-note {
+  margin-top: 20px;
+  padding: 12px 16px;
+  background: #fdfaf6; /* Tono crema suave */
+  border-left: 4px solid #e67e22; /* Línea naranja a la izquierda */
+  border-radius: 8px;
+}
+
+.modal-note p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+  margin: 0;
+}
