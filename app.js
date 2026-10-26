@@ -1,9 +1,7 @@
-// ===== SERVICE WORKER (CORREGIDO) =====
+// ===== SERVICE WORKER =====
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    // Detectamos si estamos en la raíz (index) o dentro de /views
     const swPath = window.location.pathname.includes('/views/') ? '../sw.js' : 'sw.js';
-    
     navigator.serviceWorker.register(swPath)
       .then(reg => console.log('✅ SW registrado'))
       .catch(err => console.error('❌ Error SW:', err));
@@ -39,21 +37,20 @@ if (menuBtn && dropdownMenu && overlay) {
   });
 }
 
-// ===== MANEJO DE NAVEGACIÓN (CORREGIDO) =====
+// ===== MANEJO DE NAVEGACIÓN (A PRUEBA DE TODO) =====
 document.querySelectorAll('.action-btn, .nav-item').forEach(elemento => {
   elemento.addEventListener('click', (e) => {
     
-    // Si es un enlace (<a>)
     if (elemento.tagName.toLowerCase() === 'a') {
       const href = elemento.getAttribute('href');
       
-      // Si el enlace contiene ".html" (ej. index.html, ../index.html, Cultivos.html)
-      if (href && href.includes('.html')) {
-        return; // Dejamos que el navegador navegue sin alertas
+      // Si el enlace NO es "#" y NO está vacío, es una página real. Lo dejamos pasar.
+      if (href && href !== '#') {
+        return; 
       }
     }
 
-    // Si es un botón o un href="#" (menú desplegable)
+    // Si es un botón o un href="#", mostramos la alerta
     e.preventDefault();
     
     const titulo = elemento.querySelector('.btn-title')?.textContent || 
