@@ -1,10 +1,15 @@
-// ===== SERVICE WORKER =====
+// ===== SERVICE WORKER (Ruta simple y directa) =====
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    const swPath = window.location.pathname.includes('/views/') ? '../sw.js' : 'sw.js';
-    navigator.serviceWorker.register(swPath)
+    // Usamos una ruta relativa simple que funciona tanto en index como en views
+    navigator.serviceWorker.register('./sw.js')
       .then(reg => console.log('✅ SW registrado'))
-      .catch(err => console.error('❌ Error SW:', err));
+      .catch(err => {
+        // Si falla (porque estamos en views), intentamos un nivel arriba
+        navigator.serviceWorker.register('../sw.js')
+          .then(reg => console.log('✅ SW registrado desde views'))
+          .catch(err => console.error('❌ Error SW:', err));
+      });
   });
 }
 
@@ -37,20 +42,21 @@ if (menuBtn && dropdownMenu && overlay) {
   });
 }
 
-// ===== MANEJO DE NAVEGACIÓN (A PRUEBA DE TODO) =====
+// ===== MANEJO DE NAVEGACIÓN (LA SOLUCIÓN DEFINITIVA) =====
 document.querySelectorAll('.action-btn, .nav-item').forEach(elemento => {
   elemento.addEventListener('click', (e) => {
     
+    // Si es un enlace (<a>) y tiene un atributo href...
     if (elemento.tagName.toLowerCase() === 'a') {
       const href = elemento.getAttribute('href');
       
-      // Si el enlace NO es "#" y NO está vacío, es una página real. Lo dejamos pasar.
+      // ...y NO es un "#", entonces es una página real. ¡Dejamos que navegue!
       if (href && href !== '#') {
         return; 
       }
     }
 
-    // Si es un botón o un href="#", mostramos la alerta
+    // Si es un botón o el enlace es "#", mostramos la alerta
     e.preventDefault();
     
     const titulo = elemento.querySelector('.btn-title')?.textContent || 
