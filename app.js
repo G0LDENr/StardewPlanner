@@ -40,21 +40,21 @@ if (menuBtn && dropdownMenu && overlay) {
   });
 }
 
-// ===== MANEJO DE NAVEGACIÓN =====
+// ===== MANEJO DE NAVEGACIÓN (CORREGIDO) =====
 document.querySelectorAll('.action-btn, .nav-item').forEach(elemento => {
   elemento.addEventListener('click', (e) => {
     
-    // Verificamos si es un enlace (<a>) y si tiene una ruta real
+    // Si es un enlace (<a>) y NO es un "#", dejamos que el navegador haga su trabajo
     if (elemento.tagName.toLowerCase() === 'a') {
       const href = elemento.getAttribute('href');
       
-      // Si el enlace no es "#", es una página real. Dejamos que navegue.
-      if (href && href !== '#' && href !== '') {
-        return; // Al hacer return, el navegador sigue el enlace normal
+      // Si el enlace contiene ".html", es una página real. ¡No hacemos nada más!
+      if (href && href.includes('.html')) {
+        return; 
       }
     }
 
-    // Si no tiene enlace (es un <button> o su href es "#"), mostramos el mensaje
+    // Si llegamos aquí, es un botón (como el de antes) o un href="#" (menú desplegable)
     e.preventDefault();
     
     const titulo = elemento.querySelector('.btn-title')?.textContent || 
