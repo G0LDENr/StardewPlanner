@@ -3,16 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputBuscar = document.getElementById('inputBuscar');
   const botonesFiltro = document.querySelectorAll('.chip');
   
-  let filtroLugar = 'Todos';
+  let filtroEstacion = 'Todas';
   let textoBusqueda = '';
 
+  // Función para renderizar las tarjetas
   function renderizarPeces() {
     contenedor.innerHTML = '';
     
+    // Filtrar la base de datos por nombre y estación
     const filtrados = databasePeces.filter(pez => {
       const coincideNombre = pez.nombre.toLowerCase().includes(textoBusqueda.toLowerCase());
-      const coincideLugar = filtroLugar === 'Todos' || pez.lugar === filtroLugar;
-      return coincideNombre && coincideLugar;
+      const coincideEstacion = filtroEstacion === 'Todas' || pez.estacion === filtroEstacion;
+      return coincideNombre && coincideEstacion;
     });
 
     if (filtrados.length === 0) {
@@ -20,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Crear HTML de cada tarjeta
     filtrados.forEach(pez => {
       const card = document.createElement('div');
       card.className = 'crop-card';
       
-      // 👇 AQUÍ CAMBIAMOS EL LUGAR POR LA ESTACIÓN EN LA TARJETA
       card.innerHTML = `
         <img src="${pez.svg}" alt="${pez.nombre}" class="crop-card-icon" onerror="this.src='../svg/Pesca.svg'">
         <div class="crop-card-info">
@@ -40,24 +42,26 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
       
+      // Abrir modal al hacer clic
       card.addEventListener('click', () => abrirModal(pez));
       contenedor.appendChild(card);
     });
 
+    // Inicializar los iconos de Lucide para las nuevas tarjetas
     lucide.createIcons();
   }
 
+  // Función para abrir el modal con los datos del pez
   function abrirModal(pez) {
     document.getElementById('modalImg').src = pez.svg;
     document.getElementById('modalImg').onerror = function() { this.src = '../svg/Pesca.svg'; };
     document.getElementById('modalTitulo').textContent = pez.nombre;
-    
-    // En el modal mostramos la estación en el badge superior
-    document.getElementById('modalCategoria').textContent = pez.estacion; 
-    
-    // Y mostramos el lugar y la dificultad en las filas de información
+    document.getElementById('modalCategoria').textContent = pez.estacion;
     document.getElementById('modalLugar').textContent = pez.lugar;
     document.getElementById('modalDificultad').textContent = pez.dificultad;
+    
+    // Si el pez no tiene clima definido, mostramos "Cualquiera"
+    document.getElementById('modalClima').textContent = pez.clima || "Cualquiera";
     
     document.getElementById('precioNormal').textContent = `${pez.precios.normal}g`;
     document.getElementById('precioPlata').textContent = `${pez.precios.plata}g`;
@@ -67,31 +71,34 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modalOverlay').classList.add('active');
   }
 
-  // Cerrar modal
+  // Cerrar modal dando clic en la X
   document.getElementById('closeModal').addEventListener('click', () => {
     document.getElementById('modalOverlay').classList.remove('active');
   });
   
+  // Cerrar modal dando clic en el fondo oscuro
   document.getElementById('modalOverlay').addEventListener('click', (e) => {
     if (e.target.id === 'modalOverlay') {
       document.getElementById('modalOverlay').classList.remove('active');
     }
   });
 
-  // Eventos del buscador y filtros
+  // Evento del buscador
   inputBuscar.addEventListener('input', (e) => {
     textoBusqueda = e.target.value;
     renderizarPeces();
   });
 
+  // Evento de los filtros de estación
   botonesFiltro.forEach(boton => {
     boton.addEventListener('click', () => {
       botonesFiltro.forEach(b => b.classList.remove('active'));
       boton.classList.add('active');
-      filtroLugar = boton.dataset.lugar;
+      filtroEstacion = boton.dataset.estacion;
       renderizarPeces();
     });
   });
 
+  // Renderizar los peces por primera vez al cargar la página
   renderizarPeces();
 });
