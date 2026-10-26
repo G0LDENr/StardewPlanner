@@ -40,21 +40,22 @@ if (menuBtn && dropdownMenu && overlay) {
   });
 }
 
-// ===== MANEJO DE NAVEGACIÓN (BLINDADO) =====
+// ===== MANEJO DE NAVEGACIÓN (BLINDADO TOTAL) =====
 document.querySelectorAll('.action-btn, .nav-item').forEach(elemento => {
   elemento.addEventListener('click', (e) => {
     
-    // 1. Verificamos si es un enlace (<a>)
+    // Si el elemento es un enlace (<a>)
     if (elemento.tagName.toLowerCase() === 'a') {
       const href = elemento.getAttribute('href');
       
-      // 2. Si el enlace contiene ".html" o "views/", es una página real y dejamos navegar
+      // Si la ruta contiene ".html" (sea index.html, ../index.html, views/X.html, etc.)
+      // O si contiene "views/", es un enlace real. Lo dejamos pasar.
       if (href && (href.includes('.html') || href.includes('views/'))) {
-        return; // El código se detiene aquí y el navegador hace la redirección
+        return; // El navegador navega normalmente
       }
     }
 
-    // 3. Si llegamos aquí, es un botón o un href="#" (sección en construcción)
+    // Si es un botón o tiene href="#" o está vacío, mostramos el mensaje
     e.preventDefault();
     
     const titulo = elemento.querySelector('.btn-title')?.textContent || 
