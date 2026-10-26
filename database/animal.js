@@ -36,15 +36,15 @@ const databaseAnimal = [
     svg: "../svg/Animal/Queso.svg"
   },
   {
-    id: "huevo-gallina",
-    nombre: "Huevo de Gallina",
+    id: "huevo-gallina-blanca",
+    nombre: "Huevo de Gallina Blanca",
     animal: "Gallina",
     maquina: "Recolector Automatico",
     herramienta: "Ninguna",
     produccion: "1 día",
-    nota: "Se obtiene agarrando el huevo o usando la Máquina.",
+    nota: "Se obtiene agarrando el huevo de una gallina blanca o usando la Máquina.",
     precioBase: 50,
     precios: { normal: 50, plata: 62, oro: 75, iridio: 100 },
-    svg: "../svg/Animal/Huevo-gallina.svg"
+    svg: "../svg/Animal/Huevo-gallina-blanca.svg"
   }
 ];
