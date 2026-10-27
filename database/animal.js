@@ -38,7 +38,7 @@ const databaseAnimal = [
   {
     id: "huevo-gallina-blanca",
     nombre: "Huevo de Gallina Blanca",
-    animal: "Gallina",
+    animal: "Gallina Blanca",
     maquina: "Recolector Automatico",
     herramienta: "Ninguna",
     produccion: "1 día",
@@ -46,5 +46,29 @@ const databaseAnimal = [
     precioBase: 50,
     precios: { normal: 50, plata: 62, oro: 75, iridio: 100 },
     svg: "../svg/Animal/Huevo-gallina-blanca.svg"
+  },
+  {
+    id: "huevo-gallina-marron",
+    nombre: "Huevo de Gallina Marrón",
+    animal: "Gallina Marrón",
+    maquina: "Recolector Automatico",
+    herramienta: "Ninguna",
+    produccion: "1 día",
+    nota: "Se obtiene agarrando el huevo de una gallina marrón o usando la Máquina.",
+    precioBase: 50,
+    precios: { normal: 50, plata: 62, oro: 75, iridio: 100 },
+    svg: "../svg/Animal/Huevo-de-Gallina-Marron.svg"
+  },
+  {
+    id: "huevo-dinosaurio",
+    nombre: "Huevo de Dinosaurio",
+    animal: "Dinosaurio",
+    maquina: "Recolector Automatico",
+    herramienta: "Ninguna",
+    produccion: "1 día",
+    nota: "Se obtiene agarrando el huevo de un dinosaurio o usando la Máquina.",
+    precioBase: 350,
+    precios: { normal: 350, plata: 437, oro: 525, iridio: 700 },
+    svg: "../svg/Animal/Huevo-de-Dinosaurio.svg"
   }
 ];

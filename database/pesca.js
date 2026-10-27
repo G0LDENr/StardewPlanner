@@ -58,5 +58,29 @@ const databasePeces = [
     precioBase: 75,
     precios: { normal: 75, plata: 93, oro: 112, iridio: 150 },
     svg: "../svg/Pesca/Salmon.svg"
+  },
+  {
+    id: "leyenda",
+    nombre: "Leyenda",
+    estacion: "Primavera",
+    lugar: "Bosque Tizón",
+    clima: "LLuvioso",
+    evento: "Ninguno",
+    dificultad: "110%",
+    precioBase: 5000,
+    precios: { normal: 5000, plata: 6250, oro: 7500, iridio: 10000 },
+    svg: "../svg/Pesca/Leyenda.svg"
+  },
+  {
+    id: "pez_carmesi",
+    nombre: "Pez Carmesí",
+    estacion: "Verano",
+    lugar: "Playa",
+    clima: "Soleado",
+    evento: "Ninguno",
+    dificultad: "95%",
+    precioBase: 1500,
+    precios: { normal: 1500, plata: 1875, oro: 2250, iridio: 3000 },
+    svg: "../svg/Pesca/Pez-Carmesi.svg"
   }
 ];
