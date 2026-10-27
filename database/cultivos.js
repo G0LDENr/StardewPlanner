@@ -118,5 +118,65 @@ const databaseCultivos = [
     precioBase: 30,
     precios: { normal: 15, plata: 18, oro: 22, iridio: 30 },
     svg: "../svg/Cultivos/Grano-de-Cafe.svg"
+  },
+  {
+    id: "ajo",
+    nombre: "Ajo",
+    estacion: "Primavera",
+    diasCrecimiento: 4,
+    regeneracion: "1 x cosecha",
+    precioBase: 40,
+    precios: { normal: 60, plata: 75, oro: 90, iridio: 120 },
+    svg: "../svg/Cultivos/Ajo.svg"
+  },
+  {
+    id: "calabaza_amarilla",
+    nombre: "Calabaza Amarilla",
+    estacion: "Verano",
+    diasCrecimiento: 6,
+    regeneracion: "cada 3 dias",
+    precioBase: 0,
+    precios: { normal: 45, plata: 56, oro: 67, iridio: 90 },
+    svg: "../svg/Cultivos/Calabaza-Amarilla.svg"
+  },
+  {
+    id: "col_rizada",
+    nombre: "Col Rizada",
+    estacion: "Primavera",
+    diasCrecimiento: 6,
+    regeneracion: "1 x cosecha",
+    precioBase: 70,
+    precios: { normal: 110, plata: 137, oro: 165, iridio: 220 },
+    svg: "../svg/Cultivos/Col-Rizada.svg"
+  },
+  {
+    id: "judia_verde",
+    nombre: "Judía Verde",
+    estacion: "Primavera",
+    diasCrecimiento: 10,
+    regeneracion: "cada 3 dias",
+    precioBase: 60,
+    precios: { normal: 40, plata: 50, oro: 60, iridio: 80 },
+    svg: "../svg/Cultivos/Judia-Verde.svg"
+  },
+  {
+    id: "lupulo",
+    nombre: "Lúpulo",
+    estacion: "Verano",
+    diasCrecimiento: 11,
+    regeneracion: "cada dia",
+    precioBase: 60,
+    precios: { normal: 25, plata: 31, oro: 37, iridio: 50 },
+    svg: "../svg/Cultivos/Lupulo.svg"
+  },
+  {
+    id: "ruibarbo",
+    nombre: "Ruibarbo",
+    estacion: "Primavera",
+    diasCrecimiento: 13,
+    regeneracion: "1 x cosecha",
+    precioBase: 100,
+    precios: { normal: 220, plata: 275, oro: 330, iridio: 440 },
+    svg: "../svg/Cultivos/Ruibarbo.svg"
   }
 ];

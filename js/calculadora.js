@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalCatTitulo = document.getElementById('modalCatTitulo');
   const listaCalculo = document.getElementById('listaCalculo');
   const totalGanancias = document.getElementById('totalGanancias');
-  const btnCalcular = document.getElementById('btnCalcular');
   const botonesCat = document.querySelectorAll('.cat-btn[data-cat]');
 
   let categoriaSeleccionada = 'cultivos'; // Por defecto Cultivos
@@ -23,9 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Lógica para seleccionar categoría
   botonesCat.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Quitar active-cat de todos
       botonesCat.forEach(b => b.classList.remove('active-cat'));
-      // Añadir al seleccionado
       btn.classList.add('active-cat');
       categoriaSeleccionada = btn.dataset.cat;
     });
@@ -33,17 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. Lógica para ABRIR el modal
   btnAbrirModal.addEventListener('click', () => {
-    // Limpiamos la cuadrícula antes de llenarla
     gridProductos.innerHTML = '';
     
-    // Filtramos los productos según la categoría seleccionada
     const productosFiltrados = todosLosProductos.filter(p => p.catKey === categoriaSeleccionada);
 
-    // Cambiamos el título del modal
     const nombreCat = categoriaSeleccionada.charAt(0).toUpperCase() + categoriaSeleccionada.slice(1);
     modalCatTitulo.textContent = `Elegir de ${nombreCat}`;
 
-    // Creamos las tarjetas de productos para el modal
     productosFiltrados.forEach(prod => {
       const card = document.createElement('div');
       card.className = 'product-card';
@@ -52,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <span>${prod.nombre}</span>
       `;
 
-      // Al hacer clic en un producto, lo agregamos a la calculadora y cerramos el modal
       card.addEventListener('click', () => {
         agregarProductoALista(prod);
         modalProductos.classList.remove('active');
@@ -61,9 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
       gridProductos.appendChild(card);
     });
 
-    // Mostramos el modal
     modalProductos.classList.add('active');
-    lucide.createIcons(); // Recargar iconos de lucide dentro del modal
+    lucide.createIcons();
   });
 
   // 3. Cerrar el modal
@@ -71,14 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
     modalProductos.classList.remove('active');
   });
   
-  // Cerrar modal al tocar el fondo oscuro
   modalProductos.addEventListener('click', (e) => {
     if (e.target.id === 'modalProductos') {
       modalProductos.classList.remove('active');
     }
   });
 
-  // 4. Función para agregar un producto a la lista de la calculadora
+  // 4. Función para agregar un producto a la lista
   function agregarProductoALista(producto) {
     contadorGlobal++;
     const idUnico = `calc-item-${contadorGlobal}`;
@@ -113,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputCantidad = item.querySelector('.item-cantidad');
     const selectCalidad = item.querySelector('.item-calidad');
 
-    // Función para cambiar el color de fondo de la tarjeta
     const actualizarColorCalidad = () => {
       item.classList.remove('calidad-normal', 'calidad-plata', 'calidad-oro', 'calidad-iridio');
       item.classList.add(`calidad-${selectCalidad.value}`);
@@ -126,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     actualizarColorCalidad();
 
-    // Botones de cantidad (+ y -)
     item.querySelector('.minus').addEventListener('click', () => {
       let val = parseInt(inputCantidad.value) || 1;
       if (val > 1) {
@@ -141,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
       calcularTotal();
     });
 
-    // Borrar producto
     item.querySelector('.btn-remove').addEventListener('click', () => {
       item.remove();
       calcularTotal();
@@ -150,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Eliminar mensaje de vacío si existe
     const emptyMsg = listaCalculo.querySelector('.empty-msg');
     if (emptyMsg) emptyMsg.remove();
 
@@ -180,11 +166,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     totalGanancias.textContent = `${total}g`;
   }
-
-  // Botón calcular (efecto visual)
-  btnCalcular.addEventListener('click', () => {
-    calcularTotal();
-    totalGanancias.style.transform = "scale(1.1)";
-    setTimeout(() => totalGanancias.style.transform = "scale(1)", 200);
-  });
 });
