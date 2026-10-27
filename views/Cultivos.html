@@ -35,10 +35,14 @@
 
     <!-- 🔍 BUSCADOR Y FILTROS -->
     <div class="search-filter-section">
-      <div class="search-bar">
-        <i data-lucide="search"></i>
-        <input type="text" id="inputBuscar" placeholder="Buscar por nombre...">
+      <div class="search-row">
+        <div class="search-bar">
+          <i data-lucide="search"></i>
+          <input type="text" id="inputBuscar" placeholder="Buscar por nombre...">
+        </div>
+        <button class="sort-btn" id="btnOrdenAZ">A - Z</button>
       </div>
+
       <div class="filter-chips" id="filtrosEstacion">
         <button class="chip active" data-estacion="Todas">Todas</button>
         <button class="chip" data-estacion="Primavera">Primavera</button>
@@ -63,7 +67,8 @@
         <img id="modalImg" src="" alt="">
         <div class="modal-title-text">
           <h2 id="modalTitulo"></h2>
-          <span id="modalCategoria" class="badge"></span>
+          <!-- Contenedor para las estaciones en el modal -->
+          <div id="modalEstaciones" class="modal-badges-container"></div>
         </div>
       </div>
       <div class="modal-body">
@@ -76,12 +81,22 @@
           <strong id="modalRegeneracion"></strong>
         </div>
         
+        <div class="info-row">
+          <span><i data-lucide="store"></i> Vendedor:</span>
+          <strong id="modalVendedor"></strong>
+        </div>
+
         <h4>Precios de Venta</h4>
         <div class="precios-grid">
           <div class="precio-box normal"><span>Normal</span><strong id="precioNormal"></strong></div>
           <div class="precio-box plata"><span>Plata</span><strong id="precioPlata"></strong></div>
           <div class="precio-box oro"><span>Oro</span><strong id="precioOro"></strong></div>
           <div class="precio-box iridio"><span>Iridio</span><strong id="precioIridio"></strong></div>
+        </div>
+
+        <!-- NOTA INFORMATIVA / TIP -->
+        <div class="modal-note">
+          <p id="modalTip"></p>
         </div>
       </div>
     </div>
@@ -105,7 +120,6 @@
     </a>
   </nav>
 
-  <!-- Cargamos la base de datos primero, luego la lógica de la vista -->
   <script src="../database/cultivos.js"></script>
   <script src="../app.js"></script>
   <script src="../js/cultivos.js"></script>

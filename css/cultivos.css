@@ -1,32 +1,5 @@
 /* ===== VISTA CULTIVOS (ESTILOS EXCLUSIVOS) ===== */
 
-.view-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 20px 16px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-}
-
-.back-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #2b2b2b;
-  padding: 8px;
-  border-radius: 50%;
-  transition: background 0.2s;
-  text-decoration: none;
-}
-
-.back-btn:hover { background: #f0f0f0; }
-
-.view-header h2 {
-  font-size: 1.4rem;
-  color: #2b2b2b;
-}
-
 /* 🔍 BUSCADOR Y FILTROS */
 .search-filter-section {
   padding: 16px;
@@ -37,7 +10,14 @@
   gap: 12px;
 }
 
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .search-bar {
+  flex-grow: 1;
   display: flex;
   align-items: center;
   background: #f4f1e8;
@@ -57,12 +37,32 @@
   color: #2b2b2b;
 }
 
+.sort-btn {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.sort-btn:hover { background: #f0f0f0; }
+
+.sort-btn.desc {
+  background: #f4ecf8;
+  color: #8e44ad;
+  border-color: #8e44ad;
+}
+
 .filter-chips {
   display: flex;
   gap: 8px;
   overflow-x: auto;
   padding-bottom: 5px;
-  /* Ocultar scrollbar en móviles */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -87,7 +87,7 @@
   border-color: #2d6a4f;
 }
 
-/* 📦 LISTA DE CULTIVOS (Tarjetas Horizontales) */
+/* 📦 LISTA DE CULTIVOS */
 .view-content {
   padding: 16px;
   display: flex;
@@ -127,15 +127,27 @@
   margin-bottom: 2px;
 }
 
+/* 🎨 COLORES DE ESTACIONES (Tarjetas) */
 .crop-card-season {
-  font-size: 0.8rem;
-  color: #2d6a4f;
-  background: #d1eed7;
+  font-size: 0.75rem;
   display: inline-block;
   padding: 2px 8px;
   border-radius: 10px;
   margin-bottom: 6px;
+  margin-right: 4px;
+  font-weight: 600;
 }
+
+/* Primavera - Verde */
+.crop-card-season.primavera { background: #d1eed7; color: #2d6a4f; }
+/* Verano - Amarillo/Naranja */
+.crop-card-season.verano { background: #fcf3cf; color: #b7950b; }
+/* Otoño - Marrón/Naranja oscuro */
+.crop-card-season.otono { background: #fde2c7; color: #8a4512; }
+/* Invierno - Azul */
+.crop-card-season.invierno { background: #cceafe; color: #1d5b8c; }
+/* Comodín (Fibra) */
+.crop-card-season.comodin { background: #e0e0e0; color: #555; }
 
 .crop-card-details {
   display: flex;
@@ -203,11 +215,12 @@
   justify-content: center;
   cursor: pointer;
   color: #555;
+  z-index: 10;
 }
 
 .modal-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Alinea al inicio por si hay muchos badges */
   gap: 16px;
   margin-bottom: 20px;
 }
@@ -216,24 +229,44 @@
   width: 64px;
   height: 64px;
   object-fit: contain;
+  margin-top: 5px;
+}
+
+.modal-title-text {
+  flex-grow: 1;
+  /* Deja espacio a la derecha para el botón de cerrar */
+  padding-right: 35px; 
 }
 
 .modal-title-text h2 {
   font-size: 1.4rem;
   color: #2b2b2b;
-  margin-bottom: 4px;
-  padding-right: 3px;
+  margin-bottom: 6px;
+  word-wrap: break-word;
 }
 
-.badge {
-  background: #d1eed7;
-  color: #2d6a4f;
-  font-size: 0.8rem;
+/* Contenedor de badges en el modal */
+.modal-badges-container {
+  display: flex;
+  flex-wrap: wrap; /* Si hay muchos, bajan a la siguiente línea */
+  gap: 6px;
+}
+
+/* 🎨 COLORES DE ESTACIONES (Modal) */
+.modal-badge {
+  font-size: 0.75rem;
   padding: 4px 10px;
   border-radius: 12px;
   font-weight: 600;
 }
 
+.modal-badge.primavera { background: #d1eed7; color: #2d6a4f; }
+.modal-badge.verano { background: #fcf3cf; color: #b7950b; }
+.modal-badge.otono { background: #fde2c7; color: #8a4512; }
+.modal-badge.invierno { background: #cceafe; color: #1d5b8c; }
+.modal-badge.comodin { background: #e0e0e0; color: #555; }
+
+/* Resto del modal */
 .modal-body .info-row {
   display: flex;
   justify-content: space-between;
@@ -278,8 +311,22 @@
 .precio-box span { font-size: 0.75rem; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
 .precio-box strong { font-size: 1.1rem; }
 
-/* Colores de las calidades */
 .precio-box.normal { background: #f4f1e8; color: #555; }
 .precio-box.plata { background: #e0e0e0; color: #666; }
 .precio-box.oro { background: #fcf3cf; color: #b7950b; }
 .precio-box.iridio { background: #e8daef; color: #8e44ad; }
+
+.modal-note {
+  margin-top: 20px;
+  padding: 12px 16px;
+  background: #fdfaf6; 
+  border-left: 4px solid #2d6a4f;
+  border-radius: 8px;
+}
+
+.modal-note p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+  margin: 0;
+}
