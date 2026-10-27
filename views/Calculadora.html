@@ -35,16 +35,25 @@
 
     <div class="calc-header">
       <h2>Calculadora de Ganancias</h2>
-      <p>Agrega tus productos para calcular el total.</p>
+      <p>Elige una categoría para agregar productos.</p>
     </div>
 
-    <!-- 🔽 SELECTOR DE PRODUCTOS -->
-    <div class="calc-selector">
-      <select id="selectProducto">
-        <option value="" disabled selected>Selecciona un producto...</option>
-        <!-- Se llena con JS -->
-      </select>
-      <button id="btnAgregar" class="btn-add"><i data-lucide="plus"></i></button>
+    <!-- 🎛️ BOTONES DE CATEGORÍA (Alineados y compactos) -->
+    <div class="calc-categories">
+      <div class="cat-buttons-row">
+        <button class="cat-btn" data-cat="cultivos">
+          <i data-lucide="wheat"></i> Cultivos
+        </button>
+        <button class="cat-btn" data-cat="pesca">
+          <i data-lucide="fish"></i> Pesca
+        </button>
+        <button class="cat-btn" data-cat="animal">
+          <i data-lucide="egg"></i> Animal
+        </button>
+      </div>
+      <button class="cat-btn btn-select" id="btnAbrirModal">
+        <i data-lucide="plus-circle"></i> Seleccionar Producto
+      </button>
     </div>
 
     <!-- 🛒 LISTA DE PRODUCTOS AGREGADOS -->
@@ -63,6 +72,21 @@
 
   </main>
 
+  <!-- VENTANA MODAL PARA SELECCIONAR PRODUCTOS -->
+  <div class="modal-overlay" id="modalProductos">
+    <div class="modal-content">
+      <button class="close-modal" id="closeModalProducts"><i data-lucide="x"></i></button>
+      <div class="modal-title-text" style="margin-bottom: 12px; margin-top: 10px;">
+        <h2 id="modalCatTitulo" style="font-size: 1.2rem;">Seleccionar Producto</h2>
+      </div>
+      
+      <!-- Aquí se inyectan los productos en cuadrícula -->
+      <div class="products-grid" id="gridProductos">
+        <!-- JavaScript llena esto -->
+      </div>
+    </div>
+  </div>
+
   <nav class="bottom-nav">
     <a href="../index.html" class="nav-item" data-page="inicio">
       <span class="nav-icon"><i data-lucide="home"></i></span><span class="nav-label">Inicio</span>
@@ -74,14 +98,13 @@
       <span class="nav-icon"><i data-lucide="fish"></i></span><span class="nav-label">Pesca</span>
     </a>
     <a href="Animal.html" class="nav-item" data-page="animal">
-      <span class="nav-icon"><i data-lucide="egg"></i></span><span class="nav-label">Animal</span>
+      <span class="nav-icon"><i data-lucide="bird"></i></span><span class="nav-label">Animal</span>
     </a>
     <a href="Calculadora.html" class="nav-item active" data-page="calculadora">
       <span class="nav-icon"><i data-lucide="calculator"></i></span><span class="nav-label">Calculadora</span>
     </a>
   </nav>
 
-  <!-- Cargamos las 3 bases de datos -->
   <script src="../database/cultivos.js"></script>
   <script src="../database/pesca.js"></script>
   <script src="../database/animal.js"></script>
