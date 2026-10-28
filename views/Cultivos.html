@@ -33,7 +33,6 @@
 
   <main class="main-content">
 
-    <!-- 🔍 BUSCADOR Y FILTROS -->
     <div class="search-filter-section">
       <div class="search-row">
         <div class="search-bar">
@@ -52,19 +51,14 @@
       </div>
     </div>
 
-    <!-- 📦 CONTENEDOR DE CARDS -->
-    <div class="view-content" id="listaCultivos">
-      <!-- Las tarjetas se generan con JavaScript -->
-    </div>
+    <div class="view-content" id="listaCultivos"></div>
 
   </main>
 
-  <!-- VENTANA MODAL -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content" id="modalContent">
       <button class="close-modal" id="closeModal"><i data-lucide="x"></i></button>
       
-      <!-- CABECERA DEL MODAL -->
       <div class="modal-header" id="modalHeader">
         <div class="modal-img-container" id="modalImgContainer"></div>
         <div class="modal-title-text">
@@ -83,9 +77,11 @@
           <strong id="modalRegeneracion"></strong>
         </div>
         
-        <!-- 👇 VENDEDOR CON CLASE PARA QUE SE ADAPTE -->
-        <div class="info-row">
-          <span><i data-lucide="store"></i> Vendedor:</span>
+        <!-- 👇 VENDEDOR SIEMPRE ABAJO Y CENTRADO -->
+        <div class="info-row-seller">
+          <div class="seller-header">
+            <i data-lucide="store"></i> Vendedor:
+          </div>
           <div id="modalVendedor" class="seller-text"></div>
         </div>
 
@@ -97,7 +93,6 @@
           <div class="precio-box iridio"><span>Iridio</span><strong id="precioIridio"></strong></div>
         </div>
 
-        <!-- NOTA INFORMATIVA / TIP -->
         <div class="modal-note">
           <p id="modalTip"></p>
         </div>
@@ -116,7 +111,7 @@
       <span class="nav-icon"><i data-lucide="fish"></i></span><span class="nav-label">Pesca</span>
     </a>
     <a href="Animal.html" class="nav-item" data-page="animal">
-      <span class="nav-icon"><i data-lucide="egg"></i></span><span class="nav-label">Animal</span>
+      <span class="nav-icon"><i data-lucide="bird"></i></span><span class="nav-label">Animal</span>
     </a>
     <a href="Calculadora.html" class="nav-item" data-page="calculadora">
       <span class="nav-icon"><i data-lucide="calculator"></i></span><span class="nav-label">Calculadora</span>

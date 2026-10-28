@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modalCrecimiento').textContent = `${cultivo.diasCrecimiento} días`;
     document.getElementById('modalRegeneracion').textContent = cultivo.regeneracion;
     
-    // 👇 VENDEDOR COMO TEXTO SIMPLE (El CSS lo bajará si es largo)
+    // 👇 AHORA SOLO ASIGNAMOS EL TEXTO, EL CSS YA LO TIENE CENTRADO SIEMPRE
     document.getElementById('modalVendedor').textContent = cultivo.vendedores;
     
     document.getElementById('modalTip').textContent = cultivo.tip || "No hay tips para este cultivo.";
