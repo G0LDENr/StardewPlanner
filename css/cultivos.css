@@ -1,6 +1,5 @@
 /* ===== VISTA CULTIVOS (ESTILOS EXCLUSIVOS) ===== */
 
-/* 🔍 BUSCADOR Y FILTROS */
 .search-filter-section {
   padding: 16px;
   background: #fff;
@@ -114,6 +113,7 @@
   height: 48px;
   object-fit: contain;
   margin-right: 16px;
+  flex-shrink: 0;
 }
 
 .crop-card-info {
@@ -127,7 +127,6 @@
   margin-bottom: 2px;
 }
 
-/* 🎨 COLORES DE ESTACIONES (Tarjetas) */
 .crop-card-season {
   font-size: 0.75rem;
   display: inline-block;
@@ -138,15 +137,10 @@
   font-weight: 600;
 }
 
-/* Primavera - Verde */
 .crop-card-season.primavera { background: #d1eed7; color: #2d6a4f; }
-/* Verano - Amarillo/Naranja */
 .crop-card-season.verano { background: #fcf3cf; color: #b7950b; }
-/* Otoño - Marrón/Naranja oscuro */
 .crop-card-season.otono { background: #fde2c7; color: #8a4512; }
-/* Invierno - Azul */
 .crop-card-season.invierno { background: #cceafe; color: #1d5b8c; }
-/* Comodín (Fibra) */
 .crop-card-season.comodin { background: #e0e0e0; color: #555; }
 
 .crop-card-details {
@@ -159,7 +153,7 @@
 
 .crop-card-price {
   font-weight: 700;
-  color: #000000;
+  color: #d35400;
 }
 
 .crop-card-arrow {
@@ -218,24 +212,40 @@
   z-index: 10;
 }
 
+/* ===== CABECERA DEL MODAL ===== */
 .modal-header {
   display: flex;
-  align-items: flex-start; /* Alinea al inicio por si hay muchos badges */
+  align-items: flex-start;
   gap: 16px;
   margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
 
-.modal-header img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
+.modal-img-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
   margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.modal-img-container img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.modal-img-container .equal-sign {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #888;
+  margin: 0 2px;
 }
 
 .modal-title-text {
   flex-grow: 1;
-  /* Deja espacio a la derecha para el botón de cerrar */
-  padding-right: 35px; 
+  padding-right: 35px;
 }
 
 .modal-title-text h2 {
@@ -245,14 +255,12 @@
   word-wrap: break-word;
 }
 
-/* Contenedor de badges en el modal */
 .modal-badges-container {
   display: flex;
-  flex-wrap: wrap; /* Si hay muchos, bajan a la siguiente línea */
+  flex-wrap: wrap;
   gap: 6px;
 }
 
-/* 🎨 COLORES DE ESTACIONES (Modal) */
 .modal-badge {
   font-size: 0.75rem;
   padding: 4px 10px;
@@ -266,21 +274,75 @@
 .modal-badge.invierno { background: #cceafe; color: #1d5b8c; }
 .modal-badge.comodin { background: #e0e0e0; color: #555; }
 
-/* Resto del modal */
+/* ===== DISEÑO VERTICAL PARA ÁRBOLES ===== */
+.modal-header.layout-tree {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.modal-header.layout-tree .modal-img-container {
+  order: 2;
+  margin-top: 10px;
+}
+
+.modal-header.layout-tree .modal-title-text {
+  order: 1;
+  padding-right: 0;
+}
+
+.modal-header.layout-tree .modal-badges-container {
+  justify-content: center;
+}
+
+.modal-header.layout-tree .modal-img-container img {
+  width: 64px;
+  height: 64px;
+}
+
+.modal-header.layout-tree .modal-img-container .equal-sign {
+  font-size: 2rem;
+}
+
+/* ===== INFO DEL MODAL ===== */
 .modal-body .info-row {
   display: flex;
+  flex-wrap: wrap; 
   justify-content: space-between;
+  align-items: center; 
   font-size: 0.95rem;
   color: #555;
   margin-bottom: 10px;
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 8px;
+  gap: 5px 10px;
 }
 
 .modal-body .info-row span {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-shrink: 0; 
+  white-space: nowrap;
+}
+
+/* 👇 TEXTO DEL VENDEDOR CENTRADO */
+.seller-text {
+  text-align: center; /* 👈 Centrado en lugar de derecha */
+  flex-grow: 1;
+  word-break: break-word;
+  line-height: 1.4;
+  font-weight: normal;
+  padding: 0 10px; /* Un poco de margen interno para que no toque los bordes */
+}
+
+/* En pantallas muy pequeñas, que ocupe el 100% del ancho y quede centrado */
+@media (max-width: 360px) {
+  .seller-text {
+    width: 100%;
+    margin-top: 4px;
+    text-align: center; /* 👈 También centrado en móviles */
+  }
 }
 
 .modal-body .info-row [data-lucide] {
