@@ -307,7 +307,7 @@
 /* ===== INFO DEL MODAL ===== */
 .modal-body .info-row {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap; /* 👈 Permite que el texto salte de línea si no cabe */
   justify-content: space-between;
   align-items: center; 
   font-size: 0.95rem;
@@ -326,22 +326,23 @@
   white-space: nowrap;
 }
 
-/* 👇 TEXTO DEL VENDEDOR CENTRADO */
+/* 👇 LÓGICA DEL VENDEDOR */
 .seller-text {
-  text-align: center; /* 👈 Centrado en lugar de derecha */
+  text-align: right; /* Si es corto, se alinea a la derecha */
   flex-grow: 1;
   word-break: break-word;
   line-height: 1.4;
   font-weight: normal;
-  padding: 0 10px; /* Un poco de margen interno para que no toque los bordes */
+  padding: 0 10px;
 }
 
-/* En pantallas muy pequeñas, que ocupe el 100% del ancho y quede centrado */
-@media (max-width: 360px) {
+/* 👇 Si el texto es MUY largo y salta de línea, se centra automáticamente */
+@media (max-width: 380px) {
+  /* En celulares o si el texto es muy largo, se centra */
   .seller-text {
+    text-align: center;
     width: 100%;
     margin-top: 4px;
-    text-align: center; /* 👈 También centrado en móviles */
   }
 }
 
