@@ -58,7 +58,7 @@
   border-color: #8e44ad; 
 }
 
-/* 👇 FILA DE SELECTS */
+/* FILA DE SELECTS */
 .filter-row {
   display: flex;
   align-items: center;
@@ -66,7 +66,6 @@
   width: 100%;
 }
 
-/* Estilo de los Selects */
 .custom-select {
   background: #fff;
   border: 1px solid #ddd;
@@ -76,8 +75,7 @@
   color: #555;
   outline: none;
   cursor: pointer;
-  flex: 1; /* Para que ambos midan lo mismo */
-  width: 50%; /* Ocupan la mitad cada uno */
+  flex: 1;
   -webkit-appearance: none;
   appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23888%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
@@ -97,8 +95,40 @@
   display: flex; 
   flex-direction: column; 
   gap: 12px; 
+  min-height: 300px;
 }
 
+/* 👇 DISEÑO DEL MENSAJE DE "NO HAY FAVORITOS" */
+.empty-fav-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+}
+
+.empty-fav-state i {
+  width: 64px;
+  height: 64px;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+.empty-fav-state h3 {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.empty-fav-state p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  max-width: 250px;
+}
+
+/* Tarjetas */
 .crop-card { 
   display: flex; 
   align-items: center; 
@@ -148,10 +178,180 @@
 .crop-card-season.invierno { background: #cceafe; color: #1d5b8c; }
 .crop-card-season.comodin { background: #e0e0e0; color: #555; }
 
-.crop-card-details { 
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
-  font-size: 0.85rem; 
-  color: #777; 
+/* ===== ESTILOS DEL MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: #fff;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+/* Botones de acción */
+.modal-actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.close-modal, .fav-modal-btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 32px; height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.2s;
+  position: static;
+}
+
+.close-modal:hover, .fav-modal-btn:hover { background: #e0e0e0; }
+
+.fav-modal-btn.active {
+  color: #f1c40f;
+  fill: #f1c40f;
+}
+
+/* Cabecera del Modal */
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-img-container img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.modal-title-text h2 {
+  font-size: 1.4rem;
+  color: #2b2b2b;
+  margin-bottom: 6px;
+  padding-right: 35px;
+}
+
+.modal-badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.modal-badge {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.modal-badge.primavera { background: #d1eed7; color: #2d6a4f; }
+.modal-badge.verano { background: #fcf3cf; color: #b7950b; }
+.modal-badge.otono { background: #fde2c7; color: #8a4512; }
+.modal-badge.invierno { background: #cceafe; color: #1d5b8c; }
+.modal-badge.comodin { background: #e0e0e0; color: #555; }
+
+/* Filas de información */
+.modal-body .info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 8px;
+  gap: 10px;
+}
+
+.modal-body .info-row span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.modal-body .info-row [data-lucide] {
+  width: 18px; height: 18px;
+  color: #888;
+}
+
+.modal-body h4 {
+  margin: 20px 0 12px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.precios-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.precio-box {
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.precio-box span { font-size: 0.75rem; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+.precio-box strong { font-size: 1.1rem; }
+
+.precio-box.normal { background: #f4f1e8; color: #555; }
+.precio-box.plata { background: #e0e0e0; color: #666; }
+.precio-box.oro { background: #fcf3cf; color: #b7950b; }
+.precio-box.iridio { background: #e8daef; color: #8e44ad; }
+
+.modal-note {
+  margin-top: 20px;
+  padding: 12px 16px;
+  background: #fdfaf6;
+  border-left: 4px solid #2d6a4f;
+  border-radius: 8px;
+}
+
+.modal-note p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+  margin: 0;
 }

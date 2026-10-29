@@ -34,7 +34,6 @@
   <main class="main-content">
 
     <div class="search-filter-section">
-      <!-- Fila 1: Buscador y botón de orden -->
       <div class="search-row">
         <div class="search-bar">
           <i data-lucide="search"></i>
@@ -43,7 +42,6 @@
         <button class="sort-btn" id="btnOrdenAZ">A - Z</button>
       </div>
 
-      <!-- 👇 Fila 2: Selects de Estación y Categoría lado a lado -->
       <div class="filter-row">
         <select id="selectEstacion" class="custom-select">
           <option value="Todas">Estación: Todas</option>
@@ -62,10 +60,89 @@
       </div>
     </div>
 
-    <!-- CONTENEDOR DE FAVORITOS -->
     <div class="view-content" id="listaFavoritos"></div>
 
   </main>
+
+  <!-- 👇 MODAL AGREGADO AQUÍ 👇 -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content" id="modalContent">
+      
+      <div class="modal-actions">
+        <button class="fav-modal-btn" id="btnFavoritoModal"><i data-lucide="star"></i></button>
+        <button class="close-modal" id="closeModal"><i data-lucide="x"></i></button>
+      </div>
+      
+      <div class="modal-header" id="modalHeader">
+        <div class="modal-img-container" id="modalImgContainer"></div>
+        <div class="modal-title-text">
+          <h2 id="modalTitulo"></h2>
+          <div id="modalEstaciones" class="modal-badges-container"></div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <!-- Datos comunes (se ocultan/muestran según la categoría) -->
+        <div class="info-row" id="rowCrecimiento" style="display:none;">
+          <span><i data-lucide="timer"></i> Crecimiento:</span>
+          <strong id="modalCrecimiento"></strong>
+        </div>
+        <div class="info-row" id="rowRegeneracion" style="display:none;">
+          <span><i data-lucide="refresh-cw"></i> Cosecha:</span>
+          <strong id="modalRegeneracion"></strong>
+        </div>
+        <div class="info-row" id="rowVendedor" style="display:none;">
+          <span><i data-lucide="store"></i> Vendedor:</span>
+          <strong id="modalVendedor"></strong>
+        </div>
+
+        <!-- Datos de Pesca -->
+        <div class="info-row" id="rowLugar" style="display:none;">
+          <span><i data-lucide="map-pin"></i> Lugar:</span>
+          <strong id="modalLugar"></strong>
+        </div>
+        <div class="info-row" id="rowDificultad" style="display:none;">
+          <span><i data-lucide="activity"></i> Dificultad:</span>
+          <strong id="modalDificultad"></strong>
+        </div>
+        <div class="info-row" id="rowClima" style="display:none;">
+          <span><i data-lucide="cloud-sun"></i> Clima:</span>
+          <strong id="modalClima"></strong>
+        </div>
+        <div class="info-row" id="rowEvento" style="display:none;">
+          <span><i data-lucide="calendar-heart"></i> Evento:</span>
+          <strong id="modalEvento"></strong>
+        </div>
+
+        <!-- Datos de Animales -->
+        <div class="info-row" id="rowMaquina" style="display:none;">
+          <span><i data-lucide="cog"></i> Máquina:</span>
+          <strong id="modalMaquina"></strong>
+        </div>
+        <div class="info-row" id="rowHerramienta" style="display:none;">
+          <span><i data-lucide="wrench"></i> Herramienta:</span>
+          <strong id="modalHerramienta"></strong>
+        </div>
+        <div class="info-row" id="rowProduccion" style="display:none;">
+          <span><i data-lucide="timer"></i> Producción:</span>
+          <strong id="modalProduccion"></strong>
+        </div>
+
+        <h4>Precios de Venta</h4>
+        <div class="precios-grid">
+          <div class="precio-box normal"><span>Normal</span><strong id="precioNormal"></strong></div>
+          <div class="precio-box plata"><span>Plata</span><strong id="precioPlata"></strong></div>
+          <div class="precio-box oro"><span>Oro</span><strong id="precioOro"></strong></div>
+          <div class="precio-box iridio"><span>Iridio</span><strong id="precioIridio"></strong></div>
+        </div>
+
+        <!-- Nota o Tip (segun categoría) -->
+        <div class="modal-note" id="rowNota" style="display:none;">
+          <p id="modalNota"></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <nav class="bottom-nav">
     <a href="../index.html" class="nav-item" data-page="inicio">
