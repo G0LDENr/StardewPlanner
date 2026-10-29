@@ -26,8 +26,8 @@
 
   <nav id="dropdownMenu" class="dropdown-menu">
     <a href="../index.html" class="dropdown-item"><i data-lucide="home"></i> Inicio</a>
+    <a href="Favoritos.html" class="dropdown-item"><i data-lucide="star"></i> Favoritos</a>
     <a href="#" class="dropdown-item"><i data-lucide="settings"></i> Configuración</a>
-    <a href="#" class="dropdown-item"><i data-lucide="star"></i> Favoritos</a>
     <a href="#" class="dropdown-item"><i data-lucide="info"></i> Acerca de</a>
   </nav>
 
@@ -38,7 +38,7 @@
       <p>Elige una categoría para agregar productos.</p>
     </div>
 
-    <!-- 🎛️ BOTONES DE CATEGORÍA -->
+    <!-- BOTONES DE CATEGORÍA -->
     <div class="calc-categories">
       <div class="cat-buttons-row">
         <button class="cat-btn" data-cat="cultivos">
@@ -56,12 +56,12 @@
       </button>
     </div>
 
-    <!-- 🛒 LISTA DE PRODUCTOS AGREGADOS -->
+    <!-- LISTA DE PRODUCTOS AGREGADOS -->
     <div class="calc-list" id="listaCalculo">
       <p class="empty-msg">No has agregado ningún producto.</p>
     </div>
 
-    <!-- 💰 TOTAL (Sin botón) -->
+    <!-- TOTAL -->
     <div class="calc-footer">
       <div class="total-box">
         <span>Total:</span>
@@ -71,7 +71,7 @@
 
   </main>
 
-  <!-- VENTANA MODAL PARA SELECCIONAR PRODUCTOS -->
+  <!-- MODAL PARA SELECCIONAR PRODUCTOS -->
   <div class="modal-overlay" id="modalProductos">
     <div class="modal-content">
       <button class="close-modal" id="closeModalProducts"><i data-lucide="x"></i></button>
@@ -79,10 +79,7 @@
         <h2 id="modalCatTitulo" style="font-size: 1.2rem;">Seleccionar Producto</h2>
       </div>
       
-      <!-- Aquí se inyectan los productos en cuadrícula -->
-      <div class="products-grid" id="gridProductos">
-        <!-- JavaScript llena esto -->
-      </div>
+      <div class="products-grid" id="gridProductos"></div>
     </div>
   </div>
 

@@ -1,154 +1,91 @@
-/* ===== VISTA CALCULADORA (ESTILOS COMPACTOS) ===== */
+/* ===== VISTA CALCULADORA (ESTILOS COMPLETOS) ===== */
 
-body {
-  background: #f7f7f7; 
-}
+body { background: #f7f7f7; }
 
-/* Encabezado */
-.calc-header {
-  padding: 15px 16px 10px;
-  text-align: center;
-}
-
-.calc-header h2 {
-  color: #502b7a;
-  font-size: 1.2rem;
-  margin-bottom: 2px;
-}
-
-.calc-header p {
-  color: #888;
-  font-size: 0.8rem;
-}
+.calc-header { padding: 15px 16px 10px; text-align: center; }
+.calc-header h2 { color: #502b7a; font-size: 1.2rem; margin-bottom: 2px; }
+.calc-header p { color: #888; font-size: 0.8rem; }
 
 /* 🎛️ Botones de Categoría */
-.calc-categories {
-  padding: 0 16px 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.cat-buttons-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-}
-
+.calc-categories { padding: 0 16px 15px; display: flex; flex-direction: column; gap: 10px; }
+.cat-buttons-row { display: flex; justify-content: space-between; gap: 8px; }
 .cat-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px 4px;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  background: #fff;
-  color: #666;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; padding: 10px 4px; border: 1px solid #eaeaea; border-radius: 10px;
+  background: #fff; color: #666; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
 }
-
-.cat-btn [data-lucide] {
-  width: 18px;
-  height: 18px;
-}
-
-.cat-btn.active-cat {
-  background: #f4ecf8;
-  color: #8e44ad;
-  border-color: #8e44ad;
-}
-
-.cat-btn.active-cat [data-lucide] {
-  color: #8e44ad;
-}
-
-/* Botón grande de Seleccionar */
+.cat-btn [data-lucide] { width: 18px; height: 18px; }
+.cat-btn.active-cat { background: #f4ecf8; color: #8e44ad; border-color: #8e44ad; }
+.cat-btn.active-cat [data-lucide] { color: #8e44ad; }
 .btn-select {
-  flex-direction: row;
-  background: #8e44ad;
-  color: #fff;
-  border: none;
-  padding: 12px;
-  font-size: 0.95rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.2s;
+  flex-direction: row; background: #8e44ad; color: #fff; border: none; padding: 12px;
+  font-size: 0.95rem; border-radius: 10px; cursor: pointer; transition: background 0.2s;
 }
-
-.btn-select [data-lucide] {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-}
-
-.btn-select:hover {
-  background: #7d3c98;
-}
+.btn-select [data-lucide] { width: 20px; height: 20px; margin-right: 5px; }
+.btn-select:hover { background: #7d3c98; }
 
 /* 🛒 Lista de Productos */
-.calc-list {
-  padding: 0 16px 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-height: 250px;
-}
+.calc-list { padding: 0 16px 100px; display: flex; flex-direction: column; gap: 10px; min-height: 250px; }
+.empty-msg { text-align: center; color: #aaa; font-size: 0.9rem; margin-top: 30px; }
 
-.empty-msg {
-  text-align: center;
-  color: #aaa;
-  font-size: 0.9rem;
-  margin-top: 30px;
-}
-
-/* Tarjetas de productos agregados */
+/* 👇 Tarjeta del producto en 2 filas */
 .calc-item {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   background: #fff;
-  padding: 10px;
+  padding: 12px;
   border-radius: 12px;
   border: 1px solid #eaeaea;
   box-shadow: 0 2px 4px rgba(0,0,0,0.02);
   transition: background-color 0.3s ease, border-color 0.3s ease;
+  gap: 10px;
 }
 
-.calc-item img {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  margin-right: 10px;
+/* Fila Superior: Info + Select + Eliminar */
+.calc-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .calc-item-info {
-  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.calc-item-title {
-  font-weight: 700;
-  color: #333;
-  font-size: 0.9rem;
+.calc-item-info img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
-.calc-item-sub {
-  font-size: 0.75rem;
-  color: #888;
-}
-
-/* Controles dentro de la tarjeta */
-.calc-item-controls {
+.calc-item-text {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  align-items: flex-end;
 }
 
+.calc-item-title { font-weight: 700; color: #333; font-size: 0.9rem; }
+.calc-item-sub { font-size: 0.75rem; color: #888; }
+
+.calc-item-actions-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Fila Inferior: Cantidades */
+.calc-item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Select de calidad */
 .calc-item select {
   padding: 4px 6px;
   border-radius: 6px;
@@ -159,9 +96,10 @@ body {
   font-weight: 600;
   outline: none;
   cursor: pointer;
+  height: 28px;
 }
 
-/* Control de cantidad (+ y -) */
+/* Controles de cantidad (+ y -) */
 .qty-control {
   display: flex;
   align-items: center;
@@ -169,13 +107,14 @@ body {
   border-radius: 6px;
   border: 1px solid #ddd;
   overflow: hidden;
+  height: 28px;
 }
 
 .qty-btn {
   background: #e0e0e0;
   border: none;
   width: 24px;
-  height: 24px;
+  height: 100%;
   font-size: 1rem;
   color: #555;
   cursor: pointer;
@@ -188,7 +127,7 @@ body {
 
 .item-cantidad {
   width: 32px;
-  height: 24px;
+  height: 100%;
   border: none;
   background: transparent;
   text-align: center;
@@ -199,25 +138,47 @@ body {
 }
 
 .item-cantidad::-webkit-outer-spin-button,
-.item-cantidad::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+.item-cantidad::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
+/* Botones rápidos (+5, +10, +100) */
+.quick-btns { display: flex; gap: 4px; height: 28px; }
+.quick-btn {
+  background: #e0e0e0;
+  border: none;
+  border-radius: 6px;
+  padding: 0 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.2s;
+  height: 100%;
+}
+.quick-btn:hover { background: #d0d0d0; }
+
+/* Botón de eliminar */
 .btn-remove {
   background: transparent;
   border: none;
   color: #e74c3c;
   cursor: pointer;
-  padding: 2px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
 }
 
-.btn-remove [data-lucide] {
-  width: 16px;
-  height: 16px;
+.btn-remove [data-lucide] { width: 16px; height: 16px; }
+
+/* Ajuste para pantallas muy pequeñas */
+@media (max-width: 380px) {
+  .calc-item-bottom {
+    justify-content: flex-start;
+  }
 }
 
-/* 💰 Total (Solo el cuadro, sin botón) */
+/* 💰 Total */
 .calc-footer {
   position: fixed;
   bottom: 70px;
@@ -240,24 +201,12 @@ body {
   border-radius: 8px;
 }
 
-.total-box strong {
-  color: #8e44ad;
-  font-size: 1.2rem;
-}
+.total-box strong { color: #8e44ad; font-size: 1.2rem; }
 
 /* ===== ESTILOS DE CALIDAD PARA LOS CARDS ===== */
-.calc-item.calidad-plata {
-  background: #f2f4f6;
-  border: 1px solid #aab7c4;
-}
-.calc-item.calidad-oro {
-  background: #fffcf2;
-  border: 1px solid #f1c40f;
-}
-.calc-item.calidad-iridio {
-  background: #f9f2fb;
-  border: 1px solid #9b59b6;
-}
+.calc-item.calidad-plata { background: #f2f4f6; border: 1px solid #aab7c4; }
+.calc-item.calidad-oro { background: #fffcf2; border: 1px solid #f1c40f; }
+.calc-item.calidad-iridio { background: #f9f2fb; border: 1px solid #9b59b6; }
 
 /* ===== MODAL (Cuadrícula de productos) ===== */
 #modalProductos.modal-overlay {
@@ -266,7 +215,6 @@ body {
   width: 100%; height: 100%;
   background: rgba(0,0,0,0.5);
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -276,10 +224,7 @@ body {
   transition: opacity 0.3s;
 }
 
-#modalProductos.modal-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
+#modalProductos.modal-overlay.active { opacity: 1; pointer-events: auto; }
 
 #modalProductos .modal-content {
   background: #fff;
@@ -296,9 +241,7 @@ body {
   flex-direction: column;
 }
 
-#modalProductos.modal-overlay.active .modal-content {
-  transform: translateY(0);
-}
+#modalProductos.modal-overlay.active .modal-content { transform: translateY(0); }
 
 #modalProductos .close-modal {
   position: absolute;
@@ -316,25 +259,11 @@ body {
   z-index: 10;
 }
 
-#modalProductos .close-modal:hover {
-  background: #e0e0e0;
-}
+#modalProductos .close-modal:hover { background: #e0e0e0; }
+#modalProductos .close-modal [data-lucide] { width: 16px; height: 16px; }
 
-#modalProductos .close-modal [data-lucide] {
-  width: 16px;
-  height: 16px;
-}
-
-#modalProductos .modal-title-text {
-  margin-bottom: 15px;
-  padding-right: 30px;
-}
-
-#modalProductos .modal-title-text h2 {
-  font-size: 1.2rem;
-  color: #333;
-  margin: 0;
-}
+#modalProductos .modal-title-text { margin-bottom: 15px; padding-right: 30px; }
+#modalProductos .modal-title-text h2 { font-size: 1.2rem; color: #333; margin: 0; }
 
 .products-grid {
   display: grid;
@@ -346,6 +275,7 @@ body {
 }
 
 .product-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -358,22 +288,7 @@ body {
   transition: transform 0.15s, background 0.2s;
 }
 
-.product-card:hover {
-  background: #f0f0f0;
-  transform: scale(1.05);
-}
-
-.product-card img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  margin-bottom: 6px;
-}
-
-.product-card span {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #333;
-  text-align: center;
-  line-height: 1.1;
-}
+.product-card:hover { background: #f0f0f0; transform: scale(1.05); }
+.product-card img { width: 40px; height: 40px; object-fit: contain; margin-bottom: 6px; }
+.product-card span { font-size: 0.75rem; font-weight: 600; color: #333; text-align: center; line-height: 1.1; }
+.product-card .fav-star { position: absolute; top: 4px; right: 4px; color: #f1c40f; fill: #f1c40f; width: 14px; height: 14px; }
