@@ -450,3 +450,39 @@
   line-height: 1.4;
   margin: 0;
 }
+
+/* Botones de acción en el modal */
+.modal-actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 100; /* Asegura que estén por encima de todo */
+}
+
+/* Estilo base para ambos botones */
+.close-modal, .fav-modal-btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 32px; 
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.2s;
+  position: static; /* 👈 Quitamos el absolute para que fluyan juntos */
+}
+
+.close-modal:hover, .fav-modal-btn:hover { 
+  background: #e0e0e0; 
+}
+
+/* Estrella activa */
+.fav-modal-btn.active {
+  color: #f1c40f;
+  fill: #f1c40f;
+}

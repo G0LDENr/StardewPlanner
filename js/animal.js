@@ -3,12 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputBuscar = document.getElementById('inputBuscar');
   
   let textoBusqueda = '';
+  let productoActualId = null;
 
-  // Función para renderizar las tarjetas
   function renderizarAnimal() {
     contenedor.innerHTML = '';
     
-    // Filtramos usando la base de datos databaseAnimal
     const filtrados = databaseAnimal.filter(producto => {
       return producto.nombre.toLowerCase().includes(textoBusqueda.toLowerCase());
     });
@@ -22,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('div');
       card.className = 'crop-card';
       
-      // En la tarjeta mostramos el Animal y el Precio Base
       card.innerHTML = `
         <img src="${producto.svg}" alt="${producto.nombre}" class="crop-card-icon" onerror="this.src='../svg/Vaca.svg'">
         <div class="crop-card-info">
@@ -41,35 +39,53 @@ document.addEventListener('DOMContentLoaded', () => {
       contenedor.appendChild(card);
     });
 
-    // Inicializar iconos
     lucide.createIcons();
   }
 
-  // Función para abrir el modal
   function abrirModal(producto) {
+    productoActualId = producto.id;
     document.getElementById('modalImg').src = producto.svg;
     document.getElementById('modalImg').onerror = function() { this.src = '../svg/Vaca.svg'; };
     document.getElementById('modalTitulo').textContent = producto.nombre;
     document.getElementById('modalCategoria').textContent = producto.animal;
     
-    // Datos de la máquina, herramienta y producción
     document.getElementById('modalMaquina').textContent = producto.maquina;
     document.getElementById('modalHerramienta').textContent = producto.herramienta || "Ninguna";
     document.getElementById('modalProduccion').textContent = producto.produccion;
-    
-    // Nota informativa
     document.getElementById('modalNota').textContent = producto.nota || "";
     
-    // Precios
     document.getElementById('precioNormal').textContent = `${producto.precios.normal}g`;
     document.getElementById('precioPlata').textContent = `${producto.precios.plata}g`;
     document.getElementById('precioOro').textContent = `${producto.precios.oro}g`;
     document.getElementById('precioIridio').textContent = `${producto.precios.iridio}g`;
 
+    // Lógica de favoritos
+    const btnFav = document.getElementById('btnFavoritoModal');
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    if (favoritos.includes(productoActualId)) {
+      btnFav.classList.add('active');
+    } else {
+      btnFav.classList.remove('active');
+    }
+
     document.getElementById('modalOverlay').classList.add('active');
   }
 
-  // Cerrar modal
+  document.getElementById('btnFavoritoModal').addEventListener('click', () => {
+    const btnFav = document.getElementById('btnFavoritoModal');
+    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    
+    if (favoritos.includes(productoActualId)) {
+      favoritos = favoritos.filter(id => id !== productoActualId);
+      btnFav.classList.remove('active');
+    } else {
+      favoritos.push(productoActualId);
+      btnFav.classList.add('active');
+    }
+    
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+  });
+
   document.getElementById('closeModal').addEventListener('click', () => {
     document.getElementById('modalOverlay').classList.remove('active');
   });
@@ -80,12 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Evento del buscador
   inputBuscar.addEventListener('input', (e) => {
     textoBusqueda = e.target.value;
     renderizarAnimal();
   });
 
-  // Renderizado inicial
   renderizarAnimal();
 });

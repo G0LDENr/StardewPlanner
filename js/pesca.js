@@ -2,19 +2,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const contenedor = document.getElementById('listaPeces');
   const inputBuscar = document.getElementById('inputBuscar');
   const botonesFiltro = document.querySelectorAll('.chip');
+  const btnOrdenAZ = document.getElementById('btnOrdenAZ');
   
   let filtroEstacion = 'Todas';
   let textoBusqueda = '';
+  let ordenAscendente = true;
+  let productoActualId = null;
 
-  // Función para renderizar las tarjetas
+  function getClaseEstacion(estacion) {
+    const est = estacion.toLowerCase();
+    if (est === 'primavera') return 'primavera';
+    if (est === 'verano') return 'verano';
+    if (est === 'otoño') return 'otono';
+    if (est === 'invierno') return 'invierno';
+    return 'comodin';
+  }
+
   function renderizarPeces() {
     contenedor.innerHTML = '';
     
-    // Filtrar la base de datos por nombre y estación
-    const filtrados = databasePeces.filter(pez => {
+    let filtrados = databasePeces.filter(pez => {
       const coincideNombre = pez.nombre.toLowerCase().includes(textoBusqueda.toLowerCase());
-      const coincideEstacion = filtroEstacion === 'Todas' || pez.estacion === filtroEstacion;
+      const coincideEstacion = filtroEstacion === 'Todas' || pez.estaciones.includes(filtroEstacion);
       return coincideNombre && coincideEstacion;
+    });
+
+    filtrados.sort((a, b) => {
+      if (ordenAscendente) {
+        return a.nombre.localeCompare(b.nombre); 
+      } else {
+        return b.nombre.localeCompare(a.nombre); 
+      }
     });
 
     if (filtrados.length === 0) {
@@ -22,8 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Crear HTML de cada tarjeta
     filtrados.forEach(pez => {
+      const estacionesHTML = pez.estaciones.map(est => {
+        const clase = getClaseEstacion(est);
+        return `<span class="crop-card-season ${clase}">${est}</span>`;
+      }).join('');
+
       const card = document.createElement('div');
       card.className = 'crop-card';
       
@@ -31,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <img src="${pez.svg}" alt="${pez.nombre}" class="crop-card-icon" onerror="this.src='../svg/Pesca.svg'">
         <div class="crop-card-info">
           <div class="crop-card-title">${pez.nombre}</div>
-          <div class="crop-card-season">${pez.estacion}</div> 
+          <div>${estacionesHTML}</div>
           <div class="crop-card-details">
             <span><i data-lucide="activity" style="width:14px; height:14px;"></i> ${pez.dificultad}</span>
             <span class="crop-card-price">${pez.precioBase}g</span>
@@ -42,25 +64,35 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
       
-      // Abrir modal al hacer clic
       card.addEventListener('click', () => abrirModal(pez));
       contenedor.appendChild(card);
     });
 
-    // Inicializar los iconos de Lucide para las nuevas tarjetas
     lucide.createIcons();
   }
 
-  // Función para abrir el modal con los datos del pez
   function abrirModal(pez) {
-    document.getElementById('modalImg').src = pez.svg;
-    document.getElementById('modalImg').onerror = function() { this.src = '../svg/Pesca.svg'; };
+    productoActualId = pez.id;
+    const modalImgContainer = document.getElementById('modalImgContainer');
+    modalImgContainer.innerHTML = `
+      <img src="${pez.svg}" alt="${pez.nombre}" onerror="this.src='../svg/Pesca.svg'">
+    `;
+
     document.getElementById('modalTitulo').textContent = pez.nombre;
-    document.getElementById('modalCategoria').textContent = pez.estacion;
+    
+    const modalEstacionesContainer = document.getElementById('modalEstaciones');
+    modalEstacionesContainer.innerHTML = '';
+    pez.estaciones.forEach(est => {
+      const clase = getClaseEstacion(est);
+      const badge = document.createElement('span');
+      badge.className = `modal-badge ${clase}`;
+      badge.textContent = est;
+      modalEstacionesContainer.appendChild(badge);
+    });
+    
     document.getElementById('modalLugar').textContent = pez.lugar;
     document.getElementById('modalDificultad').textContent = pez.dificultad;
-    
-    document.getElementById('modalClima').textContent = pez.clima || "Cualquiera";
+    document.getElementById('modalClima').textContent = pez.climas.join(', ');
     document.getElementById('modalEvento').textContent = pez.evento || "Ninguno";
     
     document.getElementById('precioNormal').textContent = `${pez.precios.normal}g`;
@@ -68,28 +100,60 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('precioOro').textContent = `${pez.precios.oro}g`;
     document.getElementById('precioIridio').textContent = `${pez.precios.iridio}g`;
 
+    // Lógica de favoritos
+    const btnFav = document.getElementById('btnFavoritoModal');
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    if (favoritos.includes(productoActualId)) {
+      btnFav.classList.add('active');
+    } else {
+      btnFav.classList.remove('active');
+    }
+
     document.getElementById('modalOverlay').classList.add('active');
   }
 
-  // Cerrar modal dando clic en la X
+  document.getElementById('btnFavoritoModal').addEventListener('click', () => {
+    const btnFav = document.getElementById('btnFavoritoModal');
+    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    
+    if (favoritos.includes(productoActualId)) {
+      favoritos = favoritos.filter(id => id !== productoActualId);
+      btnFav.classList.remove('active');
+    } else {
+      favoritos.push(productoActualId);
+      btnFav.classList.add('active');
+    }
+    
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+  });
+
   document.getElementById('closeModal').addEventListener('click', () => {
     document.getElementById('modalOverlay').classList.remove('active');
   });
   
-  // Cerrar modal dando clic en el fondo oscuro
   document.getElementById('modalOverlay').addEventListener('click', (e) => {
     if (e.target.id === 'modalOverlay') {
       document.getElementById('modalOverlay').classList.remove('active');
     }
   });
 
-  // Evento del buscador
+  btnOrdenAZ.addEventListener('click', () => {
+    ordenAscendente = !ordenAscendente;
+    if (ordenAscendente) {
+      btnOrdenAZ.textContent = "A - Z";
+      btnOrdenAZ.classList.remove('desc');
+    } else {
+      btnOrdenAZ.textContent = "Z - A";
+      btnOrdenAZ.classList.add('desc');
+    }
+    renderizarPeces();
+  });
+
   inputBuscar.addEventListener('input', (e) => {
     textoBusqueda = e.target.value;
     renderizarPeces();
   });
 
-  // Evento de los filtros de estación
   botonesFiltro.forEach(boton => {
     boton.addEventListener('click', () => {
       botonesFiltro.forEach(b => b.classList.remove('active'));
@@ -99,6 +163,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Renderizar los peces por primera vez al cargar la página
   renderizarPeces();
 });

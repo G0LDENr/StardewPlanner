@@ -26,14 +26,13 @@
 
   <nav id="dropdownMenu" class="dropdown-menu">
     <a href="../index.html" class="dropdown-item"><i data-lucide="home"></i> Inicio</a>
+    <a href="Favoritos.html" class="dropdown-item"><i data-lucide="star"></i> Favoritos</a>
     <a href="#" class="dropdown-item"><i data-lucide="settings"></i> Configuración</a>
-    <a href="#" class="dropdown-item"><i data-lucide="star"></i> Favoritos</a>
     <a href="#" class="dropdown-item"><i data-lucide="info"></i> Acerca de</a>
   </nav>
 
   <main class="main-content">
 
-    <!-- 🔍 BUSCADOR -->
     <div class="search-filter-section">
       <div class="search-bar">
         <i data-lucide="search"></i>
@@ -41,17 +40,19 @@
       </div>
     </div>
 
-    <!-- 📦 CONTENEDOR DE CARDS -->
-    <div class="view-content" id="listaAnimal">
-      <!-- Las tarjetas se generan con JavaScript -->
-    </div>
+    <div class="view-content" id="listaAnimal"></div>
 
   </main>
 
-  <!-- VENTANA MODAL -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
-      <button class="close-modal" id="closeModal"><i data-lucide="x"></i></button>
+      
+      <!-- BOTONES DE ACCIÓN (Estrella y Cerrar) -->
+      <div class="modal-actions">
+        <button class="fav-modal-btn" id="btnFavoritoModal"><i data-lucide="star"></i></button>
+        <button class="close-modal" id="closeModal"><i data-lucide="x"></i></button>
+      </div>
+
       <div class="modal-header">
         <img id="modalImg" src="" alt="">
         <div class="modal-title-text">
@@ -60,19 +61,16 @@
         </div>
       </div>
       <div class="modal-body">
-        <!-- Máquina -->
         <div class="info-row">
           <span><i data-lucide="cog"></i> Máquina:</span>
           <strong id="modalMaquina"></strong>
         </div>
 
-        <!-- Herramienta -->
         <div class="info-row">
           <span><i data-lucide="wrench"></i> Herramienta:</span>
           <strong id="modalHerramienta"></strong>
         </div>
 
-        <!-- Producción -->
         <div class="info-row">
           <span><i data-lucide="timer"></i> Producción:</span>
           <strong id="modalProduccion"></strong>
@@ -86,7 +84,6 @@
           <div class="precio-box iridio"><span>Iridio</span><strong id="precioIridio"></strong></div>
         </div>
 
-        <!-- NOTA INFORMATIVA -->
         <div class="modal-note">
           <p id="modalNota"></p>
         </div>

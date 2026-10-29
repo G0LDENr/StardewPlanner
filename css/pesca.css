@@ -1,6 +1,3 @@
-/* ===== VISTA PESCA (ESTILOS EXCLUSIVOS) ===== */
-
-/* 🔍 BUSCADOR Y FILTROS */
 .search-filter-section {
   padding: 16px;
   background: #fff;
@@ -10,10 +7,17 @@
   gap: 12px;
 }
 
-.search-bar {
+.search-row {
   display: flex;
   align-items: center;
-  background: #f0f8ff; /* Un tono azul muy clarito para el buscador */
+  gap: 10px;
+}
+
+.search-bar {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  background: #f0f8ff;
   border-radius: 12px;
   padding: 10px 14px;
   gap: 10px;
@@ -28,6 +32,27 @@
   font-size: 1rem;
   outline: none;
   color: #2b2b2b;
+}
+
+.sort-btn {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.sort-btn:hover { background: #f0f0f0; }
+
+.sort-btn.desc {
+  background: #eaf4fd;
+  color: #1d5b8c;
+  border-color: #1d5b8c;
 }
 
 .filter-chips {
@@ -54,12 +79,12 @@
 }
 
 .chip.active {
-  background: #1d5b8c; /* Azul oscuro en lugar de verde */
+  background: #1d5b8c;
   color: #fff;
   border-color: #1d5b8c;
 }
 
-/* 📦 LISTA DE PECES (Tarjetas Horizontales) */
+/* 📦 LISTA DE PECES */
 .view-content {
   padding: 16px;
   display: flex;
@@ -86,11 +111,10 @@
   height: 48px;
   object-fit: contain;
   margin-right: 16px;
+  flex-shrink: 0;
 }
 
-.crop-card-info {
-  flex-grow: 1;
-}
+.crop-card-info { flex-grow: 1; }
 
 .crop-card-title {
   font-size: 1.1rem;
@@ -99,15 +123,22 @@
   margin-bottom: 2px;
 }
 
+/* Colores de estaciones (Mismo estilo que cultivos) */
 .crop-card-season {
-  font-size: 0.8rem;
-  color: #1d5b8c; /* Letra azul */
-  background: #cceafe; /* Fondo azul claro */
+  font-size: 0.75rem;
   display: inline-block;
   padding: 2px 8px;
   border-radius: 10px;
   margin-bottom: 6px;
+  margin-right: 4px;
+  font-weight: 600;
 }
+
+.crop-card-season.primavera { background: #d1eed7; color: #2d6a4f; }
+.crop-card-season.verano { background: #fcf3cf; color: #b7950b; }
+.crop-card-season.otono { background: #fde2c7; color: #8a4512; }
+.crop-card-season.invierno { background: #cceafe; color: #1d5b8c; }
+.crop-card-season.comodin { background: #e0e0e0; color: #555; }
 
 .crop-card-details {
   display: flex;
@@ -122,9 +153,7 @@
   color: #000000;
 }
 
-.crop-card-arrow {
-  color: #ccc;
-}
+.crop-card-arrow { color: #ccc; }
 
 /* ===== MODAL ===== */
 .modal-overlay {
@@ -175,16 +204,17 @@
   justify-content: center;
   cursor: pointer;
   color: #555;
+  z-index: 10;
 }
 
 .modal-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
   margin-bottom: 20px;
 }
 
-.modal-header img {
+.modal-img-container img {
   width: 64px;
   height: 64px;
   object-fit: contain;
@@ -193,33 +223,47 @@
 .modal-title-text h2 {
   font-size: 1.4rem;
   color: #2b2b2b;
-  margin-bottom: 4px;
-  padding-right: 3px;
+  margin-bottom: 6px;
+  word-wrap: break-word;
 }
 
-.badge {
-  background: #cceafe; /* Fondo azul claro */
-  color: #1d5b8c; /* Letra azul */
-  font-size: 0.8rem;
+.modal-badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.modal-badge {
+  font-size: 0.75rem;
   padding: 4px 10px;
   border-radius: 12px;
   font-weight: 600;
 }
 
+.modal-badge.primavera { background: #d1eed7; color: #2d6a4f; }
+.modal-badge.verano { background: #fcf3cf; color: #b7950b; }
+.modal-badge.otono { background: #fde2c7; color: #8a4512; }
+.modal-badge.invierno { background: #cceafe; color: #1d5b8c; }
+.modal-badge.comodin { background: #e0e0e0; color: #555; }
+
+/* INFO DEL MODAL */
 .modal-body .info-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 0.95rem;
   color: #555;
   margin-bottom: 10px;
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 8px;
+  gap: 10px;
 }
 
 .modal-body .info-row span {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-shrink: 0;
 }
 
 .modal-body .info-row [data-lucide] {
@@ -227,9 +271,12 @@
   color: #888;
 }
 
-/* Color especial para el evento si no es "Ninguno" */
-#modalEvento {
-  color: #8e44ad;
+/* Estilo para el clima (que ahora puede ser largo) */
+#modalClima {
+  text-align: right;
+  flex-grow: 1;
+  font-weight: normal;
+  word-break: break-word;
 }
 
 .modal-body h4 {
@@ -252,10 +299,43 @@
   align-items: center;
 }
 
+/* Botones de acción en el modal */
+.modal-actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+
+.close-modal, .fav-modal-btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 32px; 
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.2s;
+  position: static; /* 👈 Importante para que no se salgan */
+}
+
+.close-modal:hover, .fav-modal-btn:hover { 
+  background: #e0e0e0; 
+}
+
+.fav-modal-btn.active {
+  color: #f1c40f;
+  fill: #f1c40f;
+}
+
 .precio-box span { font-size: 0.75rem; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
 .precio-box strong { font-size: 1.1rem; }
 
-/* Colores de las calidades */
 .precio-box.normal { background: #f4f1e8; color: #555; }
 .precio-box.plata { background: #e0e0e0; color: #666; }
 .precio-box.oro { background: #fcf3cf; color: #b7950b; }

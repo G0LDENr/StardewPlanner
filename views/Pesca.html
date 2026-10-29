@@ -26,19 +26,22 @@
 
   <nav id="dropdownMenu" class="dropdown-menu">
     <a href="../index.html" class="dropdown-item"><i data-lucide="home"></i> Inicio</a>
+    <a href="Favoritos.html" class="dropdown-item"><i data-lucide="star"></i> Favoritos</a>
     <a href="#" class="dropdown-item"><i data-lucide="settings"></i> Configuración</a>
-    <a href="#" class="dropdown-item"><i data-lucide="star"></i> Favoritos</a>
     <a href="#" class="dropdown-item"><i data-lucide="info"></i> Acerca de</a>
   </nav>
 
   <main class="main-content">
 
-    <!-- 🔍 BUSCADOR Y FILTROS -->
     <div class="search-filter-section">
-      <div class="search-bar">
-        <i data-lucide="search"></i>
-        <input type="text" id="inputBuscar" placeholder="Buscar pez por nombre...">
+      <div class="search-row">
+        <div class="search-bar">
+          <i data-lucide="search"></i>
+          <input type="text" id="inputBuscar" placeholder="Buscar pez...">
+        </div>
+        <button class="sort-btn" id="btnOrdenAZ">A - Z</button>
       </div>
+
       <div class="filter-chips" id="filtrosEstacion">
         <button class="chip active" data-estacion="Todas">Todas</button>
         <button class="chip" data-estacion="Primavera">Primavera</button>
@@ -48,24 +51,27 @@
       </div>
     </div>
 
-    <!-- 📦 CONTENEDOR DE CARDS -->
-    <div class="view-content" id="listaPeces">
-      <!-- Las tarjetas se generan con JavaScript -->
-    </div>
+    <div class="view-content" id="listaPeces"></div>
 
   </main>
 
-  <!-- VENTANA MODAL -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
-      <button class="close-modal" id="closeModal"><i data-lucide="x"></i></button>
-      <div class="modal-header">
-        <img id="modalImg" src="" alt="">
+      
+      <!-- BOTONES DE ACCIÓN (Estrella y Cerrar) -->
+      <div class="modal-actions">
+        <button class="fav-modal-btn" id="btnFavoritoModal"><i data-lucide="star"></i></button>
+        <button class="close-modal" id="closeModal"><i data-lucide="x"></i></button>
+      </div>
+
+      <div class="modal-header" id="modalHeader">
+        <div class="modal-img-container" id="modalImgContainer"></div>
         <div class="modal-title-text">
           <h2 id="modalTitulo"></h2>
-          <span id="modalCategoria" class="badge"></span>
+          <div id="modalEstaciones" class="modal-badges-container"></div>
         </div>
       </div>
+
       <div class="modal-body">
         <div class="info-row">
           <span><i data-lucide="map-pin"></i> Lugar:</span>
@@ -78,15 +84,14 @@
         
         <div class="info-row">
           <span><i data-lucide="cloud-sun"></i> Clima:</span>
-          <strong id="modalClima"></strong>
+          <div id="modalClima" class="modal-clima-text"></div>
         </div>
 
-        <!-- FILA DE EVENTO -->
         <div class="info-row">
           <span><i data-lucide="calendar-heart"></i> Evento:</span>
           <strong id="modalEvento"></strong>
         </div>
-        
+
         <h4>Precios de Venta</h4>
         <div class="precios-grid">
           <div class="precio-box normal"><span>Normal</span><strong id="precioNormal"></strong></div>

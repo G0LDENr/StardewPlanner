@@ -2,9 +2,9 @@ const databasePeces = [
   {
     id: "pez_gota",
     nombre: "Pez gota",
-    estacion: "Invierno",
+    estaciones: ["Invierno"],
     lugar: "Playa",
-    clima: "Soleado",
+    climas: ["Soleado", "Lluvioso"], // 👈 Arreglo
     evento: "Mercado Nocturno",
     dificultad: "75%",
     precioBase: 500,
@@ -14,9 +14,9 @@ const databasePeces = [
   {
     id: "pulpo",
     nombre: "Pulpo",
-    estacion: "Verano",
+    estaciones: ["Verano"],
     lugar: "Playa",
-    clima: "Soleado",
+    climas: ["Soleado"],
     evento: "Ninguno",
     dificultad: "95%",
     precioBase: 150,
@@ -26,9 +26,9 @@ const databasePeces = [
   {
     id: "rape",
     nombre: "Rape",
-    estacion: "Otoño",
+    estaciones: ["Otoño"],
     lugar: "Alcantarilla",
-    clima: "Soleado",
+    climas: ["Soleado"],
     evento: "Ninguno",
     dificultad: "85%",
     precioBase: 900,
@@ -38,9 +38,9 @@ const databasePeces = [
   {
     id: "pez-sol",
     nombre: "Pez Sol",
-    estacion: "Primavera",
+    estaciones: ["Primavera", "Verano"], // 👈 Ejemplo de dos estaciones
     lugar: "Bosque Tizón",
-    clima: "Soleado",
+    climas: ["Soleado"],
     evento: "Ninguno",
     dificultad: "30%",
     precioBase: 30,
@@ -50,9 +50,9 @@ const databasePeces = [
   {
     id: "salmon",
     nombre: "Salmón",
-    estacion: "Otoño",
+    estaciones: ["Otoño"],
     lugar: "Bosque Tizón",
-    clima: "Soleado",
+    climas: ["Soleado"],
     evento: "Ninguno",
     dificultad: "50%",
     precioBase: 75,
@@ -62,9 +62,9 @@ const databasePeces = [
   {
     id: "leyenda",
     nombre: "Leyenda",
-    estacion: "Primavera",
+    estaciones: ["Primavera"],
     lugar: "Bosque Tizón",
-    clima: "LLuvioso",
+    climas: ["Lluvioso"], // Corregido "LLuvioso"
     evento: "Ninguno",
     dificultad: "110%",
     precioBase: 5000,
@@ -74,13 +74,73 @@ const databasePeces = [
   {
     id: "pez_carmesi",
     nombre: "Pez Carmesí",
-    estacion: "Verano",
+    estaciones: ["Verano"],
     lugar: "Playa",
-    clima: "Soleado",
+    climas: ["Soleado"],
     evento: "Ninguno",
     dificultad: "95%",
     precioBase: 1500,
     precios: { normal: 1500, plata: 1875, oro: 2250, iridio: 3000 },
     svg: "../svg/Pesca/Pez-Carmesi.svg"
+  },
+  {
+    id: "anchoa",
+    nombre: "Anchoa",
+    estaciones: ["Primavera", "Otoño"], // 👈 Ejemplo
+    lugar: "Playa",
+    climas: ["Soleado"],
+    evento: "Ninguno",
+    dificultad: "30%",
+    precioBase: 30,
+    precios: { normal: 30, plata: 37, oro: 45, iridio: 60 },
+    svg: "../svg/Pesca/Anchoa.svg"
+  },
+  {
+    id: "atun",
+    nombre: "Atún",
+    estaciones: ["Verano", "Invierno"], // 👈 Ejemplo
+    lugar: "Playa",
+    climas: ["Soleado", "Lluvioso"],
+    evento: "Ninguno",
+    dificultad: "70%",
+    precioBase: 100,
+    precios: { normal: 100, plata: 125, oro: 150, iridio: 200 },
+    svg: "../svg/Pesca/Atun.svg"
+  },
+  {
+    id: "besugo",
+    nombre: "Besugo",
+    estaciones: ["Primavera"],
+    lugar: "Bosque Tizón",
+    climas: ["Soleado"],
+    evento: "Ninguno",
+    dificultad: "35%",
+    precioBase: 45,
+    precios: { normal: 45, plata: 56, oro: 67, iridio: 90 },
+    svg: "../svg/Pesca/Besugo.svg"
+  },
+  {
+    id: "pez_globo",
+    nombre: "Pez Globo",
+    estaciones: ["Verano"],
+    lugar: "Playa",
+    climas: ["Soleado"],
+    evento: "Ninguno",
+    dificultad: "80%",
+    precioBase: 200,
+    precios: { normal: 200, plata: 250, oro: 300, iridio: 400 },
+    svg: "../svg/Pesca/Pez-Globo.svg"
+  },
+  {
+    id: "sardina",
+    nombre: "Sardina",
+    estaciones: ["Primavera"],
+    lugar: "Playa",
+    climas: ["Soleado"],
+    evento: "Ninguno",
+    dificultad: "30%",
+    precioBase: 40,
+    precios: { normal: 40, plata: 50, oro: 60, iridio: 80 },
+    svg: "../svg/Pesca/Sardina.svg"
   }
 ];

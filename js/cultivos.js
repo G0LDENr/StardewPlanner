@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let filtroEstacion = 'Todas';
   let textoBusqueda = '';
   let ordenAscendente = true;
+  let productoActualId = null; // ID del producto en el modal
 
   function getClaseEstacion(estacion) {
     const est = estacion.toLowerCase();
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function abrirModal(cultivo) {
+    productoActualId = cultivo.id;
     const modalImgContainer = document.getElementById('modalImgContainer');
     const modalHeader = document.getElementById('modalHeader');
     
@@ -102,10 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.getElementById('modalCrecimiento').textContent = `${cultivo.diasCrecimiento} días`;
     document.getElementById('modalRegeneracion').textContent = cultivo.regeneracion;
-    
-    // 👇 AHORA SOLO ASIGNAMOS EL TEXTO, EL CSS YA LO TIENE CENTRADO SIEMPRE
     document.getElementById('modalVendedor').textContent = cultivo.vendedores;
-    
     document.getElementById('modalTip').textContent = cultivo.tip || "No hay tips para este cultivo.";
     
     document.getElementById('precioNormal').textContent = `${cultivo.precios.normal}g`;
@@ -113,8 +112,33 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('precioOro').textContent = `${cultivo.precios.oro}g`;
     document.getElementById('precioIridio').textContent = `${cultivo.precios.iridio}g`;
 
+    // Lógica de favoritos
+    const btnFav = document.getElementById('btnFavoritoModal');
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    if (favoritos.includes(productoActualId)) {
+      btnFav.classList.add('active');
+    } else {
+      btnFav.classList.remove('active');
+    }
+
     document.getElementById('modalOverlay').classList.add('active');
   }
+
+  // Evento del botón de favorito
+  document.getElementById('btnFavoritoModal').addEventListener('click', () => {
+    const btnFav = document.getElementById('btnFavoritoModal');
+    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    
+    if (favoritos.includes(productoActualId)) {
+      favoritos = favoritos.filter(id => id !== productoActualId);
+      btnFav.classList.remove('active');
+    } else {
+      favoritos.push(productoActualId);
+      btnFav.classList.add('active');
+    }
+    
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+  });
 
   document.getElementById('closeModal').addEventListener('click', () => {
     document.getElementById('modalOverlay').classList.remove('active');
